@@ -13,9 +13,9 @@
     "url": "https://github.com/chromatone/touchme.git"
   },
   "scripts": {
-    "dev": "vitepress dev --host --port 3242",
+    "dev": "vitepress dev --host --port 3442",
     "build": "vitepress build ",
-    "serve": "vitepress serve --port 3200",
+    "serve": "vitepress serve --port 3400",
     "deploy": "sh deploy.sh"
   },
   "dependencies": {
@@ -31,7 +31,8 @@
     "tone": "^14.8.38",
     "vitepress-pages": "^0.8.5",
     "vue": "^3.2.31",
-    "webmidi": "^3.0.15"
+    "webmidi": "^3.0.15",
+    "color-hash": "^2.0.1"
   },
   "devDependencies": {
     "@iconify/json": "^2.1.23",
@@ -43,6 +44,7 @@
     "unplugin-vue-components": "^0.18.5",
     "vite": "2.9.1",
     "vite-aliases": "0.9.2",
+    "vite-plugin-pwa": "^0.11.13",
     "vite-plugin-pages": "^0.22.0",
     "vite-plugin-pages-sitemap": "^1.2.0",
     "vite-plugin-windicss": "^1.8.3",

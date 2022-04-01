@@ -1,11 +1,10 @@
 ---
 home: true
-title: TouchMe experience
+title: Play on skin with TouchMe
 subtitle: Playtronica & Chromatone collaboration
+color: "#f9d4bb"
 ---
 
-![](/midi-controller-touchmeplaytronica-495753_1800x1800.webp)
+## Play on skin with TouchMe
 
-## Hey!
-
-Let's play music with touch!
+Hey! Let's play music with touch!

@@ -1,7 +1,7 @@
 import "virtual:windi.css";
 import { GesturePlugin } from "@vueuse/gesture";
 
-import "./styles/vars.css";
+import "./styles/fonts.css";
 import "./styles/transitions.css";
 import "./styles/layout.postcss";
 
