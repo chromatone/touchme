@@ -1,0 +1,48 @@
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+*.swp
+
+pids
+logs
+results
+tmp
+
+# Public builds
+public/css/main.css
+public/sitemap.xml
+public/media_files
+
+# API keys and secrets
+.env
+
+# Dependency directory
+node_modules
+bower_components
+
+# Editors
+.idea
+*.iml
+
+# OS metadata
+.nyc_output
+.DS_Store
+Thumbs.db
+
+# Vitepress
+dist
+**/dist
+wiki/
+.vitepress/.temp
+
+# vscode
+.vscode/
+
+# Obsidian
+**/.obsidian/
+

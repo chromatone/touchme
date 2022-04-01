@@ -1,0 +1,52 @@
+{
+  "name": "touchme",
+  "license": "MIT",
+  "version": "0.0.0",
+  "author": "Davay42",
+  "homepage": "https://touchme.chromatone.center",
+  "funding": {
+    "type": "ko-fi",
+    "url": "https://ko-fi.com/davay"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chromatone/touchme.git"
+  },
+  "scripts": {
+    "dev": "vitepress dev --host --port 3242",
+    "build": "vitepress build ",
+    "serve": "vitepress serve --port 3200",
+    "deploy": "sh deploy.sh"
+  },
+  "dependencies": {
+    "@tonaljs/tonal": "^4.6.5",
+    "@tonejs/midi": "^2.0.28",
+    "@vueuse/core": "^8.2.3",
+    "@vueuse/gesture": "^1.0.0",
+    "cobe": "^0.4.2",
+    "colord": "^2.9.2",
+    "hidpi-canvas": "^1.0.10",
+    "midi-writer-js": "^2.1.0",
+    "paper": "^0.12.15",
+    "tone": "^14.8.38",
+    "vitepress-pages": "^0.8.5",
+    "vue": "^3.2.31",
+    "webmidi": "^3.0.15"
+  },
+  "devDependencies": {
+    "@iconify/json": "^2.1.23",
+    "markdown-it-external-links": "^0.0.6",
+    "patch-vue-directive-ssr": "^0.0.1",
+    "pug": "3.0.2",
+    "unplugin-auto-import": "^0.6.9",
+    "unplugin-icons": "^0.14.1",
+    "unplugin-vue-components": "^0.18.5",
+    "vite": "2.9.1",
+    "vite-aliases": "0.9.2",
+    "vite-plugin-pages": "^0.22.0",
+    "vite-plugin-pages-sitemap": "^1.2.0",
+    "vite-plugin-windicss": "^1.8.3",
+    "vitepress": "0.22.3",
+    "windicss": "3.5.1"
+  }
+}
