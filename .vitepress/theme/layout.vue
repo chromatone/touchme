@@ -7,7 +7,7 @@ const route = useRoute()
 const { frontmatter } = useData()
 
 
-const backgroundColor = computed(() => getColor.hex(frontmatter.value?.title))
+const backgroundColor = computed(() => getColor.hex(frontmatter.value?.title || '0'))
 
 </script>
 
@@ -17,6 +17,7 @@ const backgroundColor = computed(() => getColor.hex(frontmatter.value?.title))
 )
   state-fullscreen.absolute.top-4.right-4.text-2xl.z-400
   state-dark.absolute.top-16.right-4.text-2xl.z-400
+  state-midi.absolute.top-28.right-4.text-2xl
   //- state-shop.absolute.bottom-4.left-4.z-400
 
   .flex.flex-col.h-100vh.w-full.pt-32
@@ -32,8 +33,8 @@ const backgroundColor = computed(() => getColor.hex(frontmatter.value?.title))
   @apply transition-all duration-800ms relative overflow-y-scroll absolute min-h-full flex flex-col items-center text-left w-full;
 }
 
-.content {
-  @apply m-auto p-4 max-w-lg hyphens-auto text-left;
+.content > div {
+  @apply flex w-full p-4 hyphens-auto text-left;
 }
 
 .nav {

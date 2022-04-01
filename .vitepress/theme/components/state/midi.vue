@@ -1,0 +1,42 @@
+<script setup>
+import { useMidi } from '~/use/midi'
+import { pitchColor } from '~/use/chromatone'
+import { onClickOutside } from '@vueuse/core'
+
+
+const panel = useStorage('global-midi-panel', false)
+const target = ref(null)
+onClickOutside(target, () => {
+
+  panel.value = false
+})
+
+const { midi } = useMidi();
+</script>
+
+<template lang="pug">
+.midi(
+  :class="{ active: panel }"
+  )
+  button(@click.stop="panel = !panel" aria-label="Toggle MIDI panel")
+    mdi-midi-input.transition-all.duration-200(
+      :style=`{
+        opacity: midi.enabled ? 1 : 0.2,
+        color: pitchColor(midi.enabled ? midi.note?.pitch : 0, midi.note?.octA)
+      }`
+      class="visible"
+    )
+  client-only
+    transition(name="panel")
+      midi-panel.panel(v-if="panel" ref="target")
+</template>
+
+<style lang="postcss" scoped>
+.midi.active {
+  @apply bg-light-700 dark_bg-dark-700;
+}
+
+.panel {
+  @apply min-w-70 absolute right-0 top-$header-height w-full;
+}
+</style>
