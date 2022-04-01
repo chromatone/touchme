@@ -4,7 +4,7 @@ subtitle: connecting the device
 date: 2022-04-15
 ---
 
-<midi-monitor />
+<midi-router class="mb-8" />
 
 Text:
 usb to usb

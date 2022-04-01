@@ -50,7 +50,7 @@ svg#visual.max-h-70vh(
     circle.transition(
       :cx="500"
       :cy="500"
-      :fill="midi.note?.attack > 0 ? 'yellow' : currentColor"
+      :fill="midi.note?.attack > 0 ? 'yellow' : 'currentColor'"
       :r="5"
       transform-origin="500 500"
       :style="{ transform: `scale(${midi.note?.attack * 10 + 1})` }"
