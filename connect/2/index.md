@@ -1,7 +1,10 @@
 ---
 title: Step 2
 subtitle: connecting the device
+date: 2022-04-15
 ---
+
+<midi-monitor />
 
 Text:
 usb to usb

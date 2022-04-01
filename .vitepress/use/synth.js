@@ -14,16 +14,16 @@ export const synthOptions = reactive({
     },
     volume: -10,
     envelope: {
-      attack: 0.02,
+      attack: 0.01,
       decay: 2,
       sustain: 1,
-      release: 4,
+      release: 1,
     },
     filterEnvelope: {
       attack: 0.1,
       decay: 2,
       sustain: 1,
-      release: 4,
+      release: 1,
     },
   }
 

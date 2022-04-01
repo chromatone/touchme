@@ -24,6 +24,7 @@
     "@vueuse/core": "^8.2.3",
     "@vueuse/gesture": "^1.0.0",
     "cobe": "^0.4.2",
+    "color-hash": "^2.0.1",
     "colord": "^2.9.2",
     "hidpi-canvas": "^1.0.10",
     "midi-writer-js": "^2.1.0",
@@ -31,8 +32,7 @@
     "tone": "^14.8.38",
     "vitepress-pages": "^0.8.5",
     "vue": "^3.2.31",
-    "webmidi": "^3.0.15",
-    "color-hash": "^2.0.1"
+    "webmidi": "^3.0.15"
   },
   "devDependencies": {
     "@iconify/json": "^2.1.23",
@@ -44,9 +44,9 @@
     "unplugin-vue-components": "^0.18.5",
     "vite": "2.9.1",
     "vite-aliases": "0.9.2",
-    "vite-plugin-pwa": "^0.11.13",
     "vite-plugin-pages": "^0.22.0",
     "vite-plugin-pages-sitemap": "^1.2.0",
+    "vite-plugin-pwa": "^0.11.13",
     "vite-plugin-windicss": "^1.8.3",
     "vitepress": "0.22.3",
     "windicss": "3.5.1"

@@ -68,7 +68,7 @@ export function chromaColorMix(chroma, tonic, part = 0.3) {
 import ColorHash from "color-hash";
 
 export const getColor = new ColorHash({
-  hue: [0, 10, 40],
-  saturation: [0.05, 0.08, 0.22],
+  hue: [0, 10, 360],
+  saturation: [0.05, 0.18, 0.52],
   lightness: [0.85, 0.87, 0.9],
 })

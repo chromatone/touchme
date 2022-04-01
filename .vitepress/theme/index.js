@@ -1,6 +1,7 @@
 import "virtual:windi.css";
 import { GesturePlugin } from "@vueuse/gesture";
 
+
 import "./styles/fonts.css";
 import "./styles/transitions.css";
 import "./styles/layout.postcss";
@@ -11,7 +12,7 @@ import NotFound from "./not-found.vue";
 const theme = {
   Layout,
   NotFound,
-  enhanceApp({ app }) {
+  enhanceApp({ app, router }) {
     app.use(GesturePlugin);
 
     // if (

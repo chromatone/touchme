@@ -12,6 +12,7 @@ const list = computed(() => pages[route.path])
 nav.flex.flex-wrap.w-full.gap-2.p-2
   a.page(v-for="page in list" :key="page" :href="page.path")
     .text-lg {{ page?.title }}
+    .font-normal {{ page?.subtitle }}
 </template>
 
 <style lang="postcss" scoped>

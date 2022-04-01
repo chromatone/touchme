@@ -11,10 +11,9 @@ export const midi = reactive({
   playing: false,
   channels: {},
   channel: useStorage("global-midi-channel", 1),
-  note: {
-    pitch: 3,
-    octA: 3,
-  },
+  note: null,
+  message: null,
+  log: [],
   cc: {},
   clock: 0,
   filter: useStorage("global-midi-filter", {}),
@@ -99,6 +98,9 @@ function initMidi() {
     input.addListener('midimessage', ev => {
       if (ev?.message?.type == 'clock') return
       midi.inputs[input.id].event = ev
+      midi.message = ev.message
+      midi.log.unshift(ev)
+      if (midi.log.length > 100) midi.log.pop()
     })
     input.addListener("noteon", (ev) => {
       midi.inputs[input.id].note = noteInOn(ev)

@@ -102,3 +102,21 @@
 .fade-enter-from {
   opacity: 0;
 }
+
+
+
+.fall-enter-active {
+  transition: all 0.5s ease;
+}
+.fall-leave-active {
+  transform: scale(0.95);
+}
+
+.fall-leave-to {
+  transform: scale(0.95);
+}
+
+.fall-enter-from {
+  @apply bg-light-50;
+  transform: scale(1.05);
+}

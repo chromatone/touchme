@@ -1,6 +1,7 @@
 ---
 title: Step 1
 subtitle: Make sure you have all you need
+date: 2022-04-30
 ---
 
 Text: Upsale!
