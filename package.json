@@ -29,6 +29,7 @@
     "hidpi-canvas": "^1.0.10",
     "midi-writer-js": "^2.1.0",
     "paper": "^0.12.15",
+    "simplex-noise": "^3.0.1",
     "tone": "^14.8.38",
     "vitepress-pages": "^0.8.5",
     "vue": "^3.2.31",

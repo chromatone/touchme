@@ -1,11 +1,16 @@
-import { PolySynth, MonoSynth, start, now, Midi } from 'tone'
+import { PolySynth, MonoSynth, start, now, Midi, Transport, Reverb, Frequency, } from 'tone'
 import { midi } from './midi'
 import { useStorage } from '@vueuse/core'
 
 const synth = {}
 
+Transport.bpm.value = 80;
+Transport.start();
+
 export const synthOptions = reactive({
   midi: useStorage('midi-synth', false),
+  quantize: '@16n',
+  transpose: -24,
   initiated: false,
   params: {
     maxPolyphony: 50,
@@ -26,11 +31,11 @@ export const synthOptions = reactive({
       release: 1,
     },
   }
-
 })
 
 export function useSynth() {
   if (!synthOptions.initiated) {
+
     watch(() => synthOptions.params, params => {
       if (synth.poly) {
         synth.poly.set(params)
@@ -57,28 +62,32 @@ export function useSynth() {
 export function init() {
   start()
   if (synth?.poly) return
-  synth.poly = new PolySynth(MonoSynth, synthOptions.params).toDestination()
+  synth.poly = new PolySynth(MonoSynth, synthOptions.params)
+  synth.reverb = new Reverb(1).toDestination()
+  synth.poly.connect(synth.reverb)
+
   synthOptions.initiated = true
 }
 
 export function synthOnce(note = 'A4', duration = '8n', time) {
   if (!synth.poly || synthOptions.mute) return init()
-  synth.poly.triggerAttackRelease(note, duration, time)
+  synth.poly.triggerAttackRelease(note, duration)
+  synth.poly.releaseAll(synthOptions.quantize)
 }
 
 export function synthAttack(note, velocity) {
   if (!synth.poly || synthOptions.mute) return init()
-  synth.poly.triggerAttack(note, now(), velocity)
+  synth.poly.triggerAttack(Frequency(note).transpose(synthOptions.transpose), synthOptions.quantize, velocity)
 }
 
 export function synthRelease(note) {
   if (!synth.poly || synthOptions.mute) return init()
-  synth.poly.triggerRelease(note)
+  synth.poly.triggerRelease(Frequency(note).transpose(synthOptions.transpose), synthOptions.quantize)
 }
 
 export function synthReleaseAll() {
   if (!synth.poly || synthOptions.mute) return init()
-  synth.poly.releaseAll()
+  synth.poly.releaseAll(synthOptions.quantize)
 }
 
 

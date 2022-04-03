@@ -69,6 +69,6 @@ import ColorHash from "color-hash";
 
 export const getColor = new ColorHash({
   hue: [0, 10, 360],
-  saturation: [0.05, 0.18, 0.52],
-  lightness: [0.85, 0.87, 0.9],
+  saturation: [0.05, 0.18, 0.82],
+  lightness: [0.65, 0.87, 0.9],
 })
