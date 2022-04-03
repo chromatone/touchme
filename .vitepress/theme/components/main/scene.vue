@@ -5,10 +5,6 @@ import { useElementBounding, useRafFn } from "@vueuse/core";
 import SimplexNoise from 'simplex-noise';
 
 
-const content = document.getElementById('content')
-
-const { width, height } = useElementBounding(content);
-
 const scene = reactive({
   width: 1000,
   height: 1000,

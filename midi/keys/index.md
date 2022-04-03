@@ -9,4 +9,6 @@ import {midi} from '~/use/midi'
 
 </script>
 
+<client-only>
 <midi-keys class="p-16" :pitch="(midi?.note?.number+3)%12" />
+</client-only>
