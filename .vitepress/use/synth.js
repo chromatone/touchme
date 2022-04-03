@@ -4,37 +4,41 @@ import { useStorage } from '@vueuse/core'
 
 const synth = {}
 
-Transport.bpm.value = 80;
-Transport.start();
+
 
 export const synthOptions = reactive({
   midi: useStorage('midi-synth', false),
+  bpm: useClamp(useStorage("tempo-bpm", 100), 10, 500),
   quantize: '@16n',
-  transpose: -24,
+  octave: useClamp(useStorage("synth-transpose", 0), -2, 2),
+  transpose: computed(() => synthOptions.octave * 12),
   initiated: false,
   params: {
-    maxPolyphony: 50,
     oscillator: {
-      type: useStorage('synth-osc', 'sawtooth8')
+      type: 'sawtooth8'
     },
-    volume: -10,
+    volume: -12,
     envelope: {
-      attack: 0.01,
-      decay: 2,
-      sustain: 1,
-      release: 1,
+      attack: 0.005,
+      decay: 0.3,
+      sustain: 0.4,
+      release: 0.8,
     },
     filterEnvelope: {
-      attack: 0.1,
-      decay: 2,
-      sustain: 1,
+      attack: 0.001,
+      decay: 0.7,
+      sustain: 0.5,
       release: 1,
-    },
+      baseFrequency: 60,
+      octaves: 5
+    }
   }
 })
 
 export function useSynth() {
   if (!synthOptions.initiated) {
+    Transport.bpm.set(synthOptions.bpm);
+    Transport.start();
 
     watch(() => synthOptions.params, params => {
       if (synth.poly) {
@@ -62,8 +66,9 @@ export function useSynth() {
 export function init() {
   start()
   if (synth?.poly) return
-  synth.poly = new PolySynth(MonoSynth, synthOptions.params)
-  synth.reverb = new Reverb(1).toDestination()
+  synth.poly = new PolySynth(MonoSynth, synthOptions.params).toDestination()
+  synth.reverb = new Reverb(2.5).toDestination()
+  synth.reverb.wet.set(0.7)
   synth.poly.connect(synth.reverb)
 
   synthOptions.initiated = true

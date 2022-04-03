@@ -42,6 +42,7 @@ transition(name="fade")
     state-midi.absolute.top-16.right-4.text-2xl
     state-synth.absolute.top-28.right-4.text-2xl
     state-quantize.absolute.top-42.right-4.text-2xl.z-400
+    state-octave.absolute.top-54.right-4.text-2xl.z-400
     //- state-shop.absolute.bottom-4.left-4.z-400
 
     .flex.flex-col.h-100vh.w-full

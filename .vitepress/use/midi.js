@@ -4,6 +4,7 @@ import { useStorage } from "@vueuse/core";
 export const midi = reactive({
   enabled: false,
   initiated: false,
+  offset: -1,
   out: true,
   inputs: {},
   outputs: {},

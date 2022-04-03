@@ -2,22 +2,23 @@
 import { useSynth } from '~/use/synth'
 const { synthOptions } = useSynth();
 
-const modes = ['+0', '@16n', '@32n', '@8n']
+const modes = [-2, -1, 0, 1, 2]
 
 let count = 0
 
 function cycle() {
   count++
-  synthOptions.quantize = modes[count % modes.length]
+  synthOptions.octave = modes[count % modes.length]
+
 }
 
 </script>
 
 <template lang="pug">
 button.icon(
-  @click="cycle"
+  @click="cycle()"
   aria-label="Synth panel"
-  ) {{ synthOptions.quantize }}
+  ) {{ synthOptions.octave }}
 </template>
 
 <style lang="postcss" scoped>
