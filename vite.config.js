@@ -6,7 +6,7 @@ import IconsResolver from 'unplugin-icons/resolver'
 import WindiCSS from 'vite-plugin-windicss'
 import AutoImport from 'unplugin-auto-import/vite'
 import { VitePWA } from 'vite-plugin-pwa'
-
+import vue from '@vitejs/plugin-vue'
 import Pages from "vite-plugin-pages";
 import { extendRoutes } from "vitepress-pages";
 import generateSitemap from 'vite-plugin-pages-sitemap'
@@ -15,10 +15,11 @@ import generateSitemap from 'vite-plugin-pages-sitemap'
 export default defineConfig({
   resolve: {
     alias: {
-      "~": fileURLToPath(new URL(".vitepress", import.meta.url)),
+      "~": fileURLToPath(new URL("src", import.meta.url)),
     },
   },
   plugins: [
+    vue(),
     AutoImport({
       // targets to transform
       include: [
@@ -34,19 +35,15 @@ export default defineConfig({
     }),
     Pages({
       dirs: [
-        { dir: ".", baseRoute: "." },
+        { dir: "src/pages", baseRoute: "." },
       ],
-      exclude: ['**/node_modules/**/*.*', '**/!(index).md'],
-      extensions: ['md'],
-      ...extendRoutes({
-        mediaTypes: {
-          cover: { size: 1200, height: 800, fit: "inside" },
-        }
-      }),
+      routeBlockLang: 'yaml',
+      exclude: ['**/node_modules/**/*.*'],
+      extensions: ['vue'],
       onRoutesGenerated: routes => (generateSitemap({ routes, hostname: 'https://touchme.chromatone.center' })),
     }),
     Components({
-      dirs: ['.vitepress/theme/components'],
+      dirs: ['src/components'],
       extensions: ['vue', 'ts', 'js'],
       directoryAsNamespace: true,
       globalNamespaces: ['global'],
@@ -100,6 +97,13 @@ export default defineConfig({
   ],
   optimizeDeps: {
     include: ['vue', '@vueuse/core', 'tone', '@tonaljs/tonal', 'colord'],
+  },
+  build: {
+    cssCodeSplit: false,
+    sourcemap: true,
+    rollupOptions: {
+      manualChunks: () => 'main.js'
+    }
   },
   //@ts-ignore
   ssr: {
