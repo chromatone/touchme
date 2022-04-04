@@ -38,7 +38,7 @@ const list = reactive({
     .flex.items-center.my-2(v-for="(thing, name) in list" :key="name")
       input.transform.scale-200(type="checkbox" :id="name" :value="thing.checked") 
       label.ml-4(:for="name") {{ thing.text }}
-  button.button.mx-auto.w-full(@click="init(); started = true") Start
+  button.button.mx-auto.w-full.font-bold(@click="init(); started = true") Start
 </template>
 
 <style lang="postcss" scoped>

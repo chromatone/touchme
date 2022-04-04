@@ -63,8 +63,11 @@ svg#visual.h-full(
   :viewBox="`0 0  ${scene.width} ${scene.height}`",
   xmlns="http://www.w3.org/2000/svg",
 )
+  defs
+    filter#blur(x="-100%" y="-100%" width="300%" height="300%")
+      feGaussianBlur(in="SourceGraphic" stdDeviation="50")
   rect(
-    opacity="0.01"
+    opacity="0.1"
     :width="scene.width"
     :height="scene.height"
   )
@@ -81,7 +84,12 @@ svg#visual.h-full(
     v-for="actor in actors" :key="actor"
     :transform="`translate(${actor.x * scene.width},${actor.y * scene.height}) rotate(${actor.angle * 360})`"
     )
-
+    circle(
+      opacity="0.5"
+      fill="hsl(30,90%,80%)"
+      r="50"
+      filter="url(#blur)"
+    )
     circle(
       stroke-width="2"
       stroke="white"

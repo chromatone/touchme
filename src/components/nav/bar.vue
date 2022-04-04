@@ -16,7 +16,7 @@ nav.flex.flex-wrap.w-full.left-0.p-2.items-center
 
   //- state-dark.absolute.top-16.right-4.text-2xl.z-400
 
-  .flex.gap-2
+  .flex.gap-4
     state-midi
     state-synth
     state-fullscreen
