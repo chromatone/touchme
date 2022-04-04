@@ -33,7 +33,8 @@ const background = computed(() => `linear-gradient(${angle.value * 360}deg, ${co
 </script>
 
 <template lang="pug">
-.flex.flex-col.h-100vh.w-full(:style="{ background }"  )
+.flex.flex-col.h-100vh.w-full 
+  // (:style="{ background }"  )
   nav-bar
   synth-start
   router-view(v-slot="{ Component }")
@@ -49,6 +50,13 @@ const background = computed(() => `linear-gradient(${angle.value * 360}deg, ${co
 
 .nav {
   @apply rounded-lg flex items-center flex-1  w-full bg-light-50/40 hover_no-underline hover_shadow transition hover_bg-light-50/80;
+}
+
+.button {
+  @apply p-4 shadow flex flex-auto justify-center items-center rounded-xl bg-light-400;
+  &.active {
+    @apply bg-light-50;
+  }
 }
 </style>
 

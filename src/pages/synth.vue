@@ -28,13 +28,9 @@ const { synthOptions, synthOnce, init } = useSynth();
     )
     la-wave-square.text-4xl
   synth-oscillators.flex-1(v-model="synthOptions.params.oscillator.type")
-  .flex-1
-  button.text-button.border(
-    @click="synthOptions.midi = !synthOptions.midi" 
-    aria-label="Play synth on MIDI input"
-    :class="{ active: synthOptions.midi }"
-    )
-    mdi-midi-input.text-3xl
+  .flex-auto.flex.gap-2
+    state-quantize
+    state-octave
 </template>
 
 <style lang="postcss" scoped>
@@ -43,7 +39,7 @@ const { synthOptions, synthOnce, init } = useSynth();
 }
 
 .panel {
-  @apply w-full p-4 bg-light-300 dark_bg-dark-300 z-20 flex bg-opacity-90 dark_bg-opacity-90 flex items-center shadow-lg;
+  @apply p-4 m-4 bg-light-300 dark_bg-dark-300 z-20 flex flex-col bg-opacity-90 dark_bg-opacity-90 flex items-center shadow-lg;
 }
 </style>
 

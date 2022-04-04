@@ -19,8 +19,8 @@ const emit = defineEmits(['update:modelValue'])
 
 <template lang='pug'>
 .flex.flex-wrap.justify-center.max-w-max
-  .flex-auto.w-full.text-sm.text-center.border-b-1.border-dark-300.dark_border-light-300 OSC
-  .flex.relative.flex-auto(v-for="(abbr, type) in types" :key="type")
+  .flex-auto.w-full.text-sm.text-center.border-b-1.border-dark-300.dark_border-light-300 OSCILLATOR TYPE
+  .flex.relative.flex-auto.gap-2(v-for="(abbr, type) in types" :key="type")
     input.absolute.right-1.top-1(
       type="radio" v-model="modelValue" 
       @input="$emit('update:modelValue', type)"
@@ -29,7 +29,7 @@ const emit = defineEmits(['update:modelValue'])
       name="OSC" 
       :aria-label="`Select ${type} oscillator`"
       )
-    label.text-button.flex-auto.flex.justify-center(
+    label.button.flex-auto.flex.justify-center(
       :for="type" 
       :value="type"
       :class="{ active: modelValue == type }"
@@ -39,3 +39,6 @@ const emit = defineEmits(['update:modelValue'])
       ph-wave-square-duotone(v-if="type == 'square8'")
       ph-wave-sawtooth-duotone(v-if="type == 'sawtooth8'")
 </template>
+
+<style lang="postcss" scoped>
+</style>

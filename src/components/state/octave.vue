@@ -15,10 +15,10 @@ function cycle() {
 </script>
 
 <template lang="pug">
-button.icon(
+button.button(
   @click="cycle()"
   aria-label="Synth panel"
-  ) {{ synthOptions.octave }}
+  ) Octave offset {{ synthOptions.octave }}
 </template>
 
 <style lang="postcss" scoped>

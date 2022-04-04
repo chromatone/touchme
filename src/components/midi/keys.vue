@@ -40,7 +40,7 @@ function keyColor(key, off) {
 </script>
 
 <template lang="pug">
-svg.w-full.mt-2#chroma-keys(
+svg.w-full.mt-2#chroma-keys.h-full(
   version="1.1",
   baseProfile="full",
   :viewBox="`-10 -20 720 360`",

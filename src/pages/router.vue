@@ -5,7 +5,7 @@ const { midi } = useMidi();
 </script>
 
 <template lang="pug">
-.flex.flex-wrap.gap-4.justify-center
+.flex.flex-wrap.gap-4.justify-center.p-8
   midi-input(
     :input="input"
     :iid="iid"

@@ -14,10 +14,10 @@ function cycle() {
 </script>
 
 <template lang="pug">
-button.icon(
+button.button(
   @click="cycle"
   aria-label="Synth panel"
-  ) {{ synthOptions.quantize }}
+  ) Quantize {{ synthOptions.quantize }}
 </template>
 
 <style lang="postcss" scoped>
