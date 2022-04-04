@@ -7,7 +7,7 @@ export const synth = {}
 
 
 export const synthOptions = reactive({
-  midi: useStorage('midi-synth', false),
+  midi: true,
   bpm: useClamp(useStorage("tempo-bpm", 100), 10, 500),
   quantize: '@16n',
   octave: useClamp(useStorage("synth-transpose", 0), -2, 2),

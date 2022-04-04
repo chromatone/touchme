@@ -66,34 +66,34 @@ export default defineConfig({
         fileExtensions: ['vue', 'ts', 'md'],
       },
     }),
-    VitePWA({
-      registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', 'robots.txt', 'apple-touch-icon.png'],
-      manifest: {
-        name: 'TouchMe experience',
-        short_name: 'Journey to the music of touch',
-        description: 'Playtronica and Chromatone collaboration',
-        theme_color: '#ffffff',
-        icons: [
-          {
-            src: 'apple-touch-icon.png',
-            sizes: '192x192',
-            type: 'image/png',
-          },
-          {
-            src: 'apple-touch-icon.png',
-            sizes: '512x512',
-            type: 'image/png',
-          },
-          {
-            src: 'apple-touch-icon.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'any maskable',
-          }
-        ]
-      }
-    }),
+    // VitePWA({
+    //   registerType: 'autoUpdate',
+    //   includeAssets: ['favicon.svg', 'robots.txt', 'apple-touch-icon.png'],
+    //   manifest: {
+    //     name: 'TouchMe experience',
+    //     short_name: 'Journey to the music of touch',
+    //     description: 'Playtronica and Chromatone collaboration',
+    //     theme_color: '#ffffff',
+    //     icons: [
+    //       {
+    //         src: 'apple-touch-icon.png',
+    //         sizes: '192x192',
+    //         type: 'image/png',
+    //       },
+    //       {
+    //         src: 'apple-touch-icon.png',
+    //         sizes: '512x512',
+    //         type: 'image/png',
+    //       },
+    //       {
+    //         src: 'apple-touch-icon.png',
+    //         sizes: '512x512',
+    //         type: 'image/png',
+    //         purpose: 'any maskable',
+    //       }
+    //     ]
+    //   }
+    // }),
   ],
   optimizeDeps: {
     include: ['vue', '@vueuse/core', 'tone', '@tonaljs/tonal', 'colord'],
