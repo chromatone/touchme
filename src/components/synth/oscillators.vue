@@ -1,18 +1,13 @@
 <script setup>
-const props = defineProps({
-  modelValue: { type: String, default: 'sawtooth8' },
-  types: {
-    type: Object,
-    default: {
-      sine: 'SIN',
-      triangle: 'TRI',
-      square8: 'SQR',
-      sawtooth8: 'SAW',
-    }
-  }
-})
+import { synthOptions } from '~/use/synth'
 
-const emit = defineEmits(['update:modelValue'])
+const types = {
+  sine: 'SIN',
+  triangle: 'TRI',
+  square8: 'SQR',
+  sawtooth8: 'SAW',
+}
+
 
 
 </script>
@@ -22,7 +17,7 @@ const emit = defineEmits(['update:modelValue'])
   .flex-auto.w-full.text-sm.text-center.border-b-1.border-dark-300.dark_border-light-300 OSCILLATOR TYPE
   .flex.relative.flex-auto.gap-2(v-for="(abbr, type) in types" :key="type")
     input.absolute.right-1.top-1(
-      type="radio" v-model="modelValue" 
+      type="radio" v-model="synthOptions.params.oscillator.type" 
       @input="$emit('update:modelValue', type)"
       :id="type"
       :value="type"
@@ -32,7 +27,7 @@ const emit = defineEmits(['update:modelValue'])
     label.button.flex-auto.flex.justify-center(
       :for="type" 
       :value="type"
-      :class="{ active: modelValue == type }"
+      :class="{ active: synthOptions.params.oscillator.type == type }"
     )
       ph-wave-sine-duotone(v-if="type == 'sine'")
       ph-wave-triangle-duotone(v-if="type == 'triangle'")

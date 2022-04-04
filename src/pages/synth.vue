@@ -16,6 +16,25 @@ onClickOutside(panel, (ev) => {
 })
 
 const { synthOptions, synthOnce, init } = useSynth();
+
+const modes = ['+0', '@16n', '@32n', '@8n']
+
+let count = 0
+
+function cycle() {
+  count++
+  synthOptions.quantize = modes[count % modes.length]
+}
+
+const octaves = [-2, -1, 0, 1, 2]
+
+let oct = 0
+
+function cycleOctaves() {
+  oct++
+  synthOptions.octave = octaves[oct % modes.length]
+
+}
 </script>
 
 <template lang="pug">
@@ -29,8 +48,14 @@ const { synthOptions, synthOnce, init } = useSynth();
     la-wave-square.text-4xl
   synth-oscillators.flex-1(v-model="synthOptions.params.oscillator.type")
   .flex-auto.flex.gap-2
-    state-quantize
-    state-octave
+    button.button(
+      @click="cycle"
+      aria-label="Synth panel"
+      ) Quantize {{ synthOptions.quantize }}
+    button.button(
+      @click="cycleOctaves()"
+      aria-label="Synth panel"
+      ) Octave offset {{ synthOptions.octave }}
 </template>
 
 <style lang="postcss" scoped>
