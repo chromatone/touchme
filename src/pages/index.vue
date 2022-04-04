@@ -64,7 +64,7 @@ svg#visual.h-full(
   xmlns="http://www.w3.org/2000/svg",
 )
   defs
-    filter#blur(x="-100%" y="-100%" width="300%" height="300%")
+    filter#blur(x="-300%" y="-300%" width="600%" height="600%")
       feGaussianBlur(in="SourceGraphic" stdDeviation="50")
   rect(
     opacity="0.1"
@@ -86,8 +86,7 @@ svg#visual.h-full(
     )
     circle(
       opacity="0.5"
-      fill="hsl(30,90%,80%)"
-      r="50"
+      r="40"
       filter="url(#blur)"
     )
     circle(
