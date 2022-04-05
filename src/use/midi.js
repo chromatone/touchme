@@ -1,5 +1,7 @@
 import { WebMidi } from "webmidi";
-import { useStorage } from "@vueuse/core";
+import { useStorage, useRafFn } from "@vueuse/core";
+
+
 
 export const midi = reactive({
   enabled: false,
@@ -13,6 +15,8 @@ export const midi = reactive({
   channels: {},
   channel: useStorage("global-midi-channel", 1),
   note: null,
+  time: 0,
+  duration: 0,
   message: null,
   log: [],
   cc: {},
@@ -20,6 +24,15 @@ export const midi = reactive({
   filter: useStorage("global-midi-filter", {}),
   available: computed(() => Object.entries(midi.outputs).length > 0),
 });
+
+const { pause, resume } = useRafFn(() => {
+  if (midi?.note?.velocity > 0) {
+    midi.duration = WebMidi.time - midi?.note?.timestamp
+  } else {
+    midi.duration = 0
+  }
+})
+
 
 export function useMidi() {
   onMounted(() => {
@@ -105,6 +118,7 @@ function initMidi() {
     })
     input.addListener("noteon", (ev) => {
       midi.inputs[input.id].note = noteInOn(ev)
+
     }, {
       channels: "all",
     });

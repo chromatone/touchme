@@ -12,20 +12,14 @@ const scene = reactive({
 
 onMounted(() => {
   const content = document.getElementById('content')
-  Object.assign(scene, useElementBounding(content))
+  const { width, height } = useElementBounding(content)
+  watchEffect(() => {
+    scene.width = width.value
+    scene.height = height.value
+  })
 })
 
-const active = ref(false)
-
-const { midi, midiAttack, midiRelease, setCC } = useMidi();
-
-function sortNotes(notes) {
-  if (!notes) return []
-  let arr = Object.values(notes)
-  return arr.sort((a, b) => {
-    return a.number < b.number ? -1 : 1
-  })
-}
+const { midi } = useMidi();
 
 const simplex = new SimplexNoise();
 
@@ -57,6 +51,7 @@ actors.push(useActor())
 </script>
 
 <template lang='pug'>
+
 svg#visual.h-full(
   version="1.1",
   baseProfile="full",
@@ -80,6 +75,7 @@ svg#visual.h-full(
     :y1="actors[0].y * scene.height"
     :y2="actors[1].y * scene.height"
   )
+
   g(
     v-for="actor in actors" :key="actor"
     :transform="`translate(${actor.x * scene.width},${actor.y * scene.height}) rotate(${actor.angle * 360})`"
@@ -103,6 +99,13 @@ svg#visual.h-full(
       r="3"
       cx="10"
     )
+  circle(
+    :cx="(actors[0].x + actors[1].x) * scene.width / 2"
+    :cy="(actors[0].y + actors[1].y) * scene.height / 2"
+    :r="midi.duration / 20 + 25"
+    :fill="pitchColor(midi?.note?.number - 9)"
+    :opacity="0.75 * midi?.note?.attack || 0"
+  )
 </template>
 
 <route lang="yaml">

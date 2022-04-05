@@ -75,16 +75,27 @@ svg#visual(
       :transform-origin="`${center.x} ${center.y}`"
       :style="{ transform: `scale(${midi.note?.attack * 10 + 1})` }"
     )
-    text.transition.font-bold(
-      text-anchor="middle"
-      alignment-baseline="central"
+    g(
       :fill="midi.note?.attack > 0 ? pitchColor((midi.note?.number - 9) % 12) : 'currentColor'"
-      :x="center.x"
-      :y="center.y * 1.5"
-      font-size="4em"
-      :transform-origin="`${center.x} ${center.y * 1.5}`"
-      :transform="`scale(${midi?.note?.attack})`"
-      ) {{ midi.note?.identifier || '' }}
+    )
+      text.transition.font-bold(
+        text-anchor="middle"
+        alignment-baseline="central"
+
+        :x="center.x"
+        :y="center.y * 1.5"
+        font-size="4em"
+        :transform-origin="`${center.x} ${center.y * 1.5}`"
+        :transform="`scale(${midi?.note?.attack || 0})`"
+        ) {{ midi.note?.identifier || '' }} 
+      rect(
+        :width="scene.width / 2"
+        :x="center.x - scene.width / 4"
+        :y="center.y * 1.6"
+        :height="20"
+        :transform-origin="`${center.x} ${center.y * 1.5}`"
+        :transform="`scale(${midi.duration / 2000} 1)`"
+      )
 </template>
 
 <route lang="yaml">

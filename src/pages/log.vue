@@ -16,9 +16,9 @@ function sortNotes(notes) {
 </script>
 
 <template lang='pug'>
-.flex.flex-col.gap-1.mb-8.overflow-x-scroll.p-4.font-mono.whitespace-nowrap
+.flex.flex-col.gap-1.mb-8.overflow-x-scroll.p-4.font-mono
   transition-group(name="fall" mode="out-in")
-    .flex.text-sm.fall(v-for="ev in midi.log" :key="ev")
+    .flex.text-sm.fall.whitespace-nowrap(v-for="ev in midi.log" :key="ev")
       .txt CH {{ ev.message?.channel }}
       .txt {{ ev.message?.type }}
       .txt {{ ev.data }}
