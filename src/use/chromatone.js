@@ -1,5 +1,8 @@
 export const midiA = 69
 
+export const notes = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#',]
+
+
 export function pitchNoteOctave(pitch) {
   return {
     note: pitch > 0 ? pitch % 12 : 12 + (pitch % 12),
@@ -27,9 +30,8 @@ export function pitchFreq(
 
 export function pitchColor(pitch = 0, octave, velocity = 1, alpha = 1) {
   octave = octave || Math.floor(pitch / 12) + 4
-  return `hsla(${(pitch % 12) * 30},${velocity * 100}%,${
-    Math.abs(octave + 2) * 8
-  }%,${alpha})`
+  return `hsla(${(pitch % 12) * 30},${velocity * 100}%,${Math.abs(octave + 2) * 8
+    }%,${alpha})`
 }
 
 export function freqColor(freq) {
@@ -44,11 +46,11 @@ export function isInChroma(chroma, tonic, note) {
   return chroma.split('')[(24 + note - tonic) % 12] == '1'
 }
 
-export function getCircleCoord(n = 0, total = 12, radius = 35, width = 100) {
+export function getCircleCoord(n = 0, total = 12, radius = 35, width = 100, height = 100) {
   let angle = ((n - total / 4) / (total / 2)) * Math.PI // Calculate the angle at which the element will be placed.
   // For a semicircle, we would use (i / numNodes) * Math.PI.
   let x = radius * Math.cos(angle) + width / 2 // Calculate the x position of the element.
-  let y = radius * Math.sin(angle) + width / 2 // Calculate the y position of the element.
+  let y = radius * Math.sin(angle) + height / 2 // Calculate the y position of the element.
   return { x, y }
 }
 

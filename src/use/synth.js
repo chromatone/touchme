@@ -1,4 +1,4 @@
-import { PolySynth, MonoSynth, start, now, Midi, Transport, Reverb, Frequency, AutoPanner } from 'tone'
+import { PolySynth, MonoSynth, start, now, Midi, Transport, Reverb, Frequency, AutoPanner, FeedbackDelay } from 'tone'
 import { midi } from './midi'
 import { useStorage } from '@vueuse/core'
 
@@ -15,7 +15,7 @@ export const synthOptions = reactive({
   initiated: false,
   params: {
     oscillator: {
-      type: 'sawtooth8'
+      type: useStorage('synth-osc', 'sawtooth8')
     },
     volume: -12,
     envelope: {
@@ -66,12 +66,12 @@ export function useSynth() {
 export function init() {
   start()
   if (synth?.poly) return
-  synth.pan = new AutoPanner('4n').toDestination()
+  synth.pan = new AutoPanner({ depth: 0.4, frequency: '8n', wet: 0.7 }).toDestination()
   synth.reverb = new Reverb(2.5).connect(synth.pan)
   synth.poly = new PolySynth(MonoSynth, synthOptions.params).connect(synth.pan)
-
-  synth.reverb.wet.set(0.7)
+  synth.delay = new FeedbackDelay({ delayTime: '8n', wet: 0.3, feedback: 0.3, maxDelay: '8n' }).toDestination()
   synth.poly.connect(synth.reverb)
+  synth.poly.connect(synth.delay)
   synth.poly.connect(synth.pan)
   synth.pan.start()
 

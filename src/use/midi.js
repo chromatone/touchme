@@ -17,19 +17,44 @@ export const midi = reactive({
   note: null,
   time: 0,
   duration: 0,
+  maxDuration: 3000,
   message: null,
   log: [],
   cc: {},
   clock: 0,
   filter: useStorage("global-midi-filter", {}),
   available: computed(() => Object.entries(midi.outputs).length > 0),
+  total: {
+    hits: 0,
+    dur: 0,
+    duration: computed(() => midi.total.dur + midi.duration),
+    notes: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    durations: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    durs: computed(() => midi.total.durations.map((d, p) => ({ pitch: p, dur: d })).filter(el => el.dur > 0)),
+    reset() {
+      midi.total.hits = 0;
+      midi.total.dur = 0
+      midi.total.notes = new Array(12).fill(0)
+      midi.total.durations = new Array(12).fill(0)
+    }
+  }
 });
 
+
 const { pause, resume } = useRafFn(() => {
+  midi.time = WebMidi.time
   if (midi?.note?.velocity > 0) {
     midi.duration = WebMidi.time - midi?.note?.timestamp
   } else {
+    midi.total.dur += midi.duration
+    midi.total.durations[midi?.note?.pitch || 0] += midi.duration
     midi.duration = 0
+  }
+})
+
+watch(() => midi.duration, dur => {
+  if (dur > midi.maxDuration) {
+    midi.total.reset()
   }
 })
 
@@ -118,7 +143,9 @@ function initMidi() {
     })
     input.addListener("noteon", (ev) => {
       midi.inputs[input.id].note = noteInOn(ev)
-
+      midi.total.hits++
+      let pitch = (ev.note.number + 3) % 12;
+      midi.total.notes[pitch] = midi.total.notes[pitch] + 1
     }, {
       channels: "all",
     });
@@ -164,9 +191,9 @@ function noteInOn(ev) {
   note.pitch = (note.number + 3) % 12;
   note.octA = Math.floor((note.number + 3) / 12) - 1;
   if (midi.filter[note.channel]) return;
-  midi.note = note;
   createChannel(note.channel);
   midi.channels[note.channel].notes[note.number] = note;
+  midi.note = note;
   return note
 }
 
