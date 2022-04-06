@@ -49,13 +49,16 @@ const background = computed(() => `linear-gradient(${angle.value * 360}deg, ${co
 }
 
 .nav {
-  @apply rounded-lg flex items-center flex-1  w-full bg-light-50/40 hover_no-underline hover_shadow transition hover_bg-light-50/80;
+  @apply rounded-lg flex items-center flex-1  w-full bg-dark-50/40 hover_no-underline hover_shadow transition hover_bg-light-50/80;
 }
 
 .button {
-  @apply p-4 shadow flex flex-auto justify-center items-center rounded-xl bg-light-400;
+  @apply p-4 shadow flex transition flex-auto justify-center items-center rounded-xl bg-light-400 dark_bg-dark-500;
+  &:hover {
+    @apply bg-light-50 dark_bg-dark-50;
+  }
   &.active {
-    @apply bg-light-50;
+    @apply bg-light-200 dark_bg-dark-200;
   }
 }
 </style>

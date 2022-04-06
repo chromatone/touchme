@@ -25,7 +25,7 @@ onKeyStroke(' ', ev => {
     a.font-normal.underline(href="https://apps.apple.com/ru/app/web-midi-browser/id953846217" target="_blank") Web MIDI Browser on iOS
   .flex.items-center.justify-center.flex-wrap.py-2.m-auto(v-else)
     .flex.m-2
-      a.font-normal.p-2.border.border-green-500.text-green-500.select-none.rounded-lg(href="/explore/monitor/") 
+      .font-normal.p-2.border.border-green-500.text-green-500.select-none.rounded-lg
         span(v-if="midi.available") MIDI 
         span(v-else) Plug in your MIDI device
     .button.opacity-30(@click="midi.out = !midi.out",:class="{ active: midi.out }") OUT

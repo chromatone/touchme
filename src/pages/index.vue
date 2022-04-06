@@ -19,43 +19,24 @@ onMounted(() => {
   })
 })
 
+const visual = ref()
+const { width, height } = useElementBounding(visual)
+
 const { midi } = useMidi();
 
-const simplex = new SimplexNoise();
-
-function useActor() {
-  const actor = reactive({
-    x: 100,
-    y: 100,
-    angle: 0,
-  })
-  const count = ref(0)
-
-  const initial = Math.random()
-
-  const { pause, resume } = useRafFn(() => {
-    count.value++
-    actor.x = (simplex.noise2D(initial * 100, count.value / 2000) + 1) / 2;
-    actor.y = (simplex.noise2D(initial * 200, count.value / 2000) + 1) / 2;
-    actor.angle = (simplex.noise2D(initial * 300, count.value / 2000) + 1) / 2;
-  })
-  return actor
-}
-
-const actors = reactive([])
-
-actors.push(useActor())
-actors.push(useActor())
-
+const circles = [
+  { cx: Math.random(), cy: Math.random() },
+]
 
 </script>
 
 <template lang='pug'>
 
 svg#visual.h-full(
+  ref="visual"
   version="1.1",
   baseProfile="full",
-  :viewBox="`0 0  ${scene.width} ${scene.height}`",
+  :viewBox="`0 0  ${width} ${height}`",
   xmlns="http://www.w3.org/2000/svg",
 )
   defs
@@ -63,49 +44,49 @@ svg#visual.h-full(
       feGaussianBlur(in="SourceGraphic" stdDeviation="50")
   rect(
     opacity="0.1"
-    :width="scene.width"
-    :height="scene.height"
+    :width="width"
+    :height="height"
+  )
+  rect(
+    :x="width / 2"
+    :y="127 / midi?.note?.number * height || height / 2"
+    :width="midi.duration / 5"
+    :height="100"
+    :fill="pitchColor(midi?.note?.pitch)"
+  )
+  rect(
+    style="transition: all 300ms ease-in-out"
+    :x="width / 2 - 50"
+    :y="0"
+    :height="height"
+    :width="100"
+    :style="`transform: scale(${midi.duration / 500}, 1)`"
+    :transform-origin="`${width / 2} ${0}`"
+    :fill="pitchColor(midi?.note?.pitch - 24)"
   )
   line(
-    style="transition: stroke-width 0.2s ease-out;"
-    :stroke-width="midi?.note?.number * midi?.note?.velocity / 200"
-    :stroke="pitchColor(midi?.note?.number - 21)"
-    :x1="actors[0].x * scene.width"
-    :x2="actors[1].x * scene.width"
-    :y1="actors[0].y * scene.height"
-    :y2="actors[1].y * scene.height"
+    style="transition: all 300ms ease-in-out"
+    :x1="0"
+    :x2="width"
+    :y1="0"
+    :y2="0"
+    :stroke="pitchColor(midi?.note?.pitch - 12)"
+    :stroke-width="midi.duration"
+    :transform-origin="`${width / 2} ${0}`"
+    :style="`transform: translateY(${(127 - midi?.note?.number) / 127 * height || 0}px)`"
+  )
+  circle(
+    style="transition: all 300ms ease-in-out"
+    v-for="num in 127" :key="num"
+    :cx="width / 2"
+    :cy="(127 - num) / 127 * height || 0"
+    :transform-origin="`${width / 2} ${(127 - num) / 127 * height || 0}`"
+    :r="30"
+    :fill="pitchColor((num + 3) % 12)"
+    :opacity="midi?.note?.number == num ? 1 : 0"
+    :style="`transform: scale(${midi?.note?.number == num ? midi.duration / 50 : 1})`"
   )
 
-  g(
-    v-for="actor in actors" :key="actor"
-    :transform="`translate(${actor.x * scene.width},${actor.y * scene.height}) rotate(${actor.angle * 360})`"
-    )
-    circle(
-      opacity="0.5"
-      r="40"
-      filter="url(#blur)"
-    )
-    circle(
-      stroke-width="2"
-      stroke="white"
-      fill="hsl(30,90%,80%)"
-      r="30"
-    )
-    circle(
-      r="3"
-      cx="20"
-    )
-    circle(
-      r="3"
-      cx="10"
-    )
-  circle(
-    :cx="(actors[0].x + actors[1].x) * scene.width / 2"
-    :cy="(actors[0].y + actors[1].y) * scene.height / 2"
-    :r="midi.duration / 20 + 25"
-    :fill="pitchColor(midi?.note?.number - 9)"
-    :opacity="0.75 * midi?.note?.attack || 0"
-  )
 </template>
 
 <route lang="yaml">
