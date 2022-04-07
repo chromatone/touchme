@@ -15,7 +15,7 @@ g.cross
     :width="100"
     :style="`transform: scale(${midi.duration / 500}, 1)`"
     :transform-origin="`${width / 2} ${0}`"
-    :fill="pitchColor(midi?.note?.pitch - 24)"
+    :fill="pitchColor(midi?.note?.pitch - 24 + 7)"
   )
   line.mix-blend-multiply.dark_mix-blend-difference(
     style="transition: all 300ms ease-in-out"
@@ -34,7 +34,7 @@ g.cross
     :cx="width / 2"
     :cy="(127 - num) / 127 * height || 0"
     :transform-origin="`${width / 2} ${(127 - num) / 127 * height || 0}`"
-    :r="10"
+    :r="60"
     :fill="pitchColor((num + 3) % 12)"
     :opacity="midi?.note?.number == num ? 0.9 : 0"
     :style="`transform: scale(${midi?.note?.number == num ? midi.duration / 50 : 1})`"

@@ -1,12 +1,13 @@
 <script setup>
-
+import * as scenes from './scene'
 import { useScene } from '~/use/scene';
 const { visual, width, height } = useScene()
+
+const activeScene = ref('Rose')
 
 </script>
 
 <template lang='pug'>
-
 svg#visual.h-full(
   ref="visual"
   version="1.1",
@@ -26,12 +27,21 @@ svg#visual.h-full(
     :width="width"
     :height="height"
   )
-  //- scene-grid
-  //- scene-circle
-  //- scene-cross
-  //- scene-columns
-  scene-rose
+
+  transition(name="fade" mode="out-in")
+    keep-alive
+      component( :is="scenes[activeScene]")
+
   scene-overlay
+
+  g
+    g.cursor-pointer(
+      @click="activeScene = scene"
+      v-for="(c, scene, i) in scenes" :key="scene"
+      :transform="`translate(0 ${i * 50 + 50})`"
+    )
+      rect(width="100" height="40" rx="10" ry="10" fill="hsla(0,0%,0%,0.1)")
+      text(fill="currentColor" y="25" x="10" :font-weight="scene == activeScene ? 'bold' : 'normal'") {{ scene }}
 
 </template>
 

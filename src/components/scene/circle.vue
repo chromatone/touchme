@@ -9,7 +9,7 @@ const round = computed(() => new Array(12).fill(1).map((r, i) => getCircleCoord(
 
 <template lang='pug'>
 g
-  //- circle.mix-blend-multiply.dark_mix-blend-difference(
+  circle.mix-blend-multiply.dark_mix-blend-difference(
     style="transition: all 400ms ease-in-out"
     v-for="(coord, p) in round" :key="p"
     :cx="coord.x"
