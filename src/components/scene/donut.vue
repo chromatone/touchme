@@ -1,34 +1,31 @@
 <script setup>
 //https://css-tricks.com/building-a-donut-chart-with-vue-and-svg/
-import { pitchColor } from '~/use/chromatone'
-import { midi } from '~/use/midi.js'
-import { useScene } from '~/use/scene';
-const { width, height } = useScene()
+import { pitchColor } from "~/use/chromatone";
+import { midi } from "~/use/midi.js";
+import { useScene } from "~/use/scene";
+const { width, height } = useScene();
 
-const radius = computed(() => width.value / 3)
-const circ = computed(() => 2 * Math.PI * radius.value)
+const radius = computed(() => width.value / 3);
+const circ = computed(() => 2 * Math.PI * radius.value);
 
-const totalDur = computed(() => midi.total.durations.reduce((acc, val) => acc + val))
+const totalDur = computed(() => midi.total.durations.reduce((acc, val) => acc + val));
 
 function getOffset(val) {
-  return circ.value - circ.value * val / totalDur.value
+  return circ.value - (circ.value * val) / totalDur.value;
 }
 
-
-
 const chart = computed(() => {
-  let angle = -90
-  const arr = []
+  let angle = -90;
+  const arr = [];
   midi.total.durations.forEach((val, i) => {
-    arr.push(angle)
-    angle = 360 * val / totalDur.value + angle
-  })
-  return arr
-})
-
+    arr.push(angle);
+    angle = (360 * val) / totalDur.value + angle;
+  });
+  return arr;
+});
 </script>
 
-<template lang='pug'>
+<template lang="pug">
 g.donut
   g(v-for="(value, index) in midi.total.durations")
     circle(
