@@ -39,7 +39,8 @@ const background = computed(() => `linear-gradient(${angle.value * 360}deg, ${co
   synth-start
   router-view(v-slot="{ Component }")
     transition(name="fade" mode="out-in")
-      component#content(:is="Component")
+      keep-alive
+        component#content(:is="Component")
 //debug
 </template>
 

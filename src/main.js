@@ -1,6 +1,5 @@
 import { createApp } from "vue";
 import App from "./app.vue";
-import Level from './pages/level.vue'
 
 import './styles/index.css'
 
@@ -24,6 +23,4 @@ const router = createRouter({
 const app = createApp(App);
 
 app.use(router).mount("#app");
-
-const uv = createApp(Level).mount('#level');
 

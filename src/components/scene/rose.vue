@@ -39,7 +39,7 @@ g
     :cy="coord.y || height / 2"
     :fill="pitchColor(p)"
     :transform-origin="`${coord.x} ${coord.y}`"
-    :style="`transform: scale(${80 * midi.total.durations[p] / midi.total.duration})`"
+    :style="`transform: scale(${50 * midi.total.durations[p] / midi.total.duration})`"
   )
   line.mix-blend-difference(
     v-for="line in lines" :key="line"

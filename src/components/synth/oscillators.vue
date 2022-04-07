@@ -29,10 +29,10 @@ const types = {
       :value="type"
       :class="{ active: synthOptions.params.oscillator.type == type }"
     )
-      ph-wave-sine-duotone(v-if="type == 'sine'")
-      ph-wave-triangle-duotone(v-if="type == 'triangle'")
-      ph-wave-square-duotone(v-if="type == 'square8'")
-      ph-wave-sawtooth-duotone(v-if="type == 'sawtooth8'")
+      icon-ph-wave-sine-duotone(v-if="type == 'sine'")
+      icon-ph-wave-triangle-duotone(v-if="type == 'triangle'")
+      icon-ph-wave-square-duotone(v-if="type == 'square8'")
+      icon-ph-wave-sawtooth-duotone(v-if="type == 'sawtooth8'")
 </template>
 
 <style lang="postcss" scoped>

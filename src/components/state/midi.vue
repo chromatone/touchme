@@ -7,7 +7,6 @@ import { onClickOutside } from '@vueuse/core'
 const panel = useStorage('global-midi-panel', false)
 const target = ref(null)
 onClickOutside(target, () => {
-
   panel.value = false
 })
 
@@ -25,6 +24,6 @@ button(@click.stop="panel = !panel" aria-label="Toggle MIDI panel")
 
 <style lang="postcss" scoped>
 .panel {
-  @apply min-w-70 absolute right-0 top-$header-height w-full;
+  @apply min-w-70 absolute right-0 top-0 w-full;
 }
 </style>

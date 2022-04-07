@@ -1,9 +1,10 @@
 <script setup>
 import * as scenes from './scene'
 import { useScene } from '~/use/scene';
+import { useStorage } from '@vueuse/core';
 const { visual, width, height } = useScene()
 
-const activeScene = ref('Rose')
+const activeScene = useStorage('active-scene', 'Rose')
 
 </script>
 

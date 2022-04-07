@@ -4,20 +4,9 @@ import { useMidi } from '~/use/midi.js'
 import { useElementBounding, useRafFn } from "@vueuse/core";
 import SimplexNoise from 'simplex-noise';
 
+import { useScene } from '~/use/scene';
+const { width, height } = useScene()
 
-const scene = reactive({
-  width: 1000,
-  height: 1000,
-})
-
-onMounted(() => {
-  const content = document.getElementById('content')
-  const { width, height } = useElementBounding(content)
-  watchEffect(() => {
-    scene.width = width.value
-    scene.height = height.value
-  })
-})
 
 const { midi } = useMidi();
 
@@ -55,7 +44,7 @@ actors.push(useActor())
 svg#visual.h-full(
   version="1.1",
   baseProfile="full",
-  :viewBox="`0 0  ${scene.width} ${scene.height}`",
+  :viewBox="`0 0  ${width} ${height}`",
   xmlns="http://www.w3.org/2000/svg",
 )
   defs
@@ -63,22 +52,22 @@ svg#visual.h-full(
       feGaussianBlur(in="SourceGraphic" stdDeviation="50")
   rect(
     opacity="0.1"
-    :width="scene.width"
-    :height="scene.height"
+    :width="width"
+    :height="height"
   )
   line(
     style="transition: stroke-width 0.2s ease-out;"
     :stroke-width="midi?.note?.number * midi?.note?.velocity / 200"
     :stroke="pitchColor(midi?.note?.number - 21)"
-    :x1="actors[0].x * scene.width"
-    :x2="actors[1].x * scene.width"
-    :y1="actors[0].y * scene.height"
-    :y2="actors[1].y * scene.height"
+    :x1="actors[0].x * width"
+    :x2="actors[1].x * width"
+    :y1="actors[0].y * height"
+    :y2="actors[1].y * height"
   )
 
   g(
     v-for="actor in actors" :key="actor"
-    :transform="`translate(${actor.x * scene.width},${actor.y * scene.height}) rotate(${actor.angle * 360})`"
+    :transform="`translate(${actor.x * width},${actor.y * height}) rotate(${actor.angle * 360})`"
     )
     circle(
       opacity="0.5"
@@ -100,8 +89,8 @@ svg#visual.h-full(
       cx="10"
     )
   circle(
-    :cx="(actors[0].x + actors[1].x) * scene.width / 2"
-    :cy="(actors[0].y + actors[1].y) * scene.height / 2"
+    :cx="(actors[0].x + actors[1].x) * width / 2"
+    :cy="(actors[0].y + actors[1].y) * height / 2"
     :r="midi.duration / 20 + 25"
     :fill="pitchColor(midi?.note?.number - 9)"
     :opacity="0.75 * midi?.note?.attack || 0"
