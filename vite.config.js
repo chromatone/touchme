@@ -50,7 +50,7 @@ export default defineConfig({
     }),
     Components({
       dirs: ['src/components'],
-      extensions: ['vue', 'ts', 'js'],
+      extensions: ['vue'],
       directoryAsNamespace: true,
       globalNamespaces: ['global'],
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
@@ -108,6 +108,7 @@ export default defineConfig({
   build: {
     cssCodeSplit: false,
     sourcemap: true,
+    chunkSizeWarningLimit: Infinity,
     rollupOptions: {
       manualChunks: () => 'main.js'
     }
