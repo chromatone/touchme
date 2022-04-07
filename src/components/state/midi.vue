@@ -16,7 +16,7 @@ const { midi } = useMidi();
 
 <template lang="pug">
 button(@click.stop="panel = !panel" aria-label="Toggle MIDI panel")
-  mdi-midi-input.transition-all.duration-200(
+  icon-mdi-midi-input.transition-all.duration-200(
     :style=`{ opacity: midi.enabled ? 1 : 0.2, color: pitchColor(midi.enabled ? midi.note?.pitch : 0, midi.note?.octA) }`
   )
   transition(name="panel")

@@ -8,7 +8,7 @@ button.icon(
   @click.stop.prevent="synthOnce(); !synthOptions.initiated && init()"
   aria-label="Synth panel"
   )
-  la-wave-square
+  icon-la-wave-square
 </template>
 
 <style lang="postcss" scoped>

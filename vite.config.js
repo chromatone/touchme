@@ -19,7 +19,13 @@ export default defineConfig({
     },
   },
   plugins: [
-    vue(),
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: tag => tag == 'feDistantLight'
+        }
+      }
+    }),
     AutoImport({
       // targets to transform
       include: [
@@ -51,7 +57,7 @@ export default defineConfig({
       exclude: [/node_modules/, /\.git/],
       resolvers: [
         IconsResolver({
-          componentPrefix: '',
+          componentPrefix: 'icon',
         }),
       ],
     }),
@@ -98,6 +104,7 @@ export default defineConfig({
   optimizeDeps: {
     include: ['vue', '@vueuse/core', 'tone', '@tonaljs/tonal', 'colord'],
   },
+
   build: {
     cssCodeSplit: false,
     sourcemap: true,

@@ -41,10 +41,10 @@ onKeyStroke(' ', ev => {
       bi-volume-up(v-if="synthOptions.midi")
       bi-volume-off(v-else)
     button.play.button(@click="midi.playing = !midi.playing")
-      la-play(v-if="!midi.playing")
-      la-pause(v-else)
+      icon-la-play(v-if="!midi.playing")
+      icon-la-pause(v-else)
     button.text-button.border(@click="stopAll()")
-      la-stop
+      icon-la-stop
 
     .button.border(v-for="output in midi.outputs")  
       span {{ output.name }}

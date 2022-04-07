@@ -34,7 +34,7 @@ button(
   v-show="supported"
   @click="toggle()"
 )
-  la-expand
+  icon-la-expand
 </template>
 
 <style lang="postcss" scoped>

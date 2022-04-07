@@ -45,7 +45,7 @@ function cycleOctaves() {
     @click="synthOnce()" 
     aria-label="Test synth sound"
     )
-    la-wave-square.text-4xl
+    icon-la-wave-square.text-4xl
   synth-oscillators.flex-1(v-model="synthOptions.params.oscillator.type")
   .flex-auto.flex.gap-2
     button.button(
