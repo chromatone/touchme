@@ -1,5 +1,5 @@
 
-export { default as Columns } from './columns.vue'
+export { default as Stats } from './stats.vue'
 export { default as Cross } from './cross.vue'
 export { default as Rose } from './rose.vue'
 export { default as Level } from './level.vue'
