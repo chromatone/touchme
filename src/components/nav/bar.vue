@@ -9,18 +9,11 @@ const list = computed(() => useParents(route.path))
 </script>
 
 <template lang='pug'>
-nav.flex.flex-wrap.w-full.left-0.p-2.items-center
-  .flex-auto.gap-4.flex.flex-wrap
-    transition-group(name="list" mode="out-in")
-      router-link(v-for="page in routes" :key="page" :to="page.path") {{ page?.title }} 
-
-  //- state-dark.absolute.top-16.right-4.text-2xl.z-400
-
-  .flex.gap-4.absolute.flex-col.right-2.bottom-2
-    state-dark
-    state-midi
-    state-synth
-    state-fullscreen
+.flex.gap-4.absolute.flex-col.right-2.bottom-2.text-xl.items-center.opacity-40.hover_opacity-100.transition
+  state-dark
+  midi-state
+  synth-state
+  state-fullscreen
 </template>
 
 <style lang="postcss" scoped>

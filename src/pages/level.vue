@@ -60,7 +60,7 @@ g.arrows.pointer-events-none.transition(transform="translate(0 40)")
       :width="width / 2"
       :x="width / 2 - width / 4"
       :y="height / 2 * 1.6"
-      :height="20"
+      :height="300"
       :transform-origin="`${width / 2} ${height / 2 * 1.5}`"
       :transform="`scale(${midi.duration / 2000} 1)`"
     )

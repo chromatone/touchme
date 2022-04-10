@@ -16,7 +16,7 @@ const types = {
 .flex.flex-wrap.justify-center.max-w-max
   .flex-auto.w-full.text-sm.text-center.border-b-1.border-dark-300.dark_border-light-300 OSCILLATOR TYPE
   .flex.relative.flex-auto.gap-2(v-for="(abbr, type) in types" :key="type")
-    input.absolute.right-1.top-1(
+    input.absolute.right-1.top-1.z-10(
       type="radio" v-model="synthOptions.params.oscillator.type" 
       @input="$emit('update:modelValue', type)"
       :id="type"
@@ -24,7 +24,7 @@ const types = {
       name="OSC" 
       :aria-label="`Select ${type} oscillator`"
       )
-    label.button.flex-auto.flex.justify-center(
+    label.button.flex-auto.flex.justify-center.m-1(
       :for="type" 
       :value="type"
       :class="{ active: synthOptions.params.oscillator.type == type }"

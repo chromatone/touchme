@@ -19,10 +19,10 @@ const color = computed(() => props.input?.note?.velocity > 0
 .p-4.shadow-lg.rounded-2xl.bg-light-900.dark_bg-dark-300.relative.border-2.shadow-lg(
   style="flex: 1 1 200px"
   )
-  .flex.justify-between
+  .flex.justify-between.flex-wrap.gap-1
     .flex-col
-      .text-md {{ input.manufacturer }}
-      .text-2xl.font-bold {{ input.name }}
+      .text-sm {{ input.manufacturer }}
+      .text-xl.font-bold {{ input.name }}
     .flex-col.text-xs.font-mono.flex.gap-2.text-center
 
       .display(v-if="input.note" :style="{ backgroundColor: color }") 

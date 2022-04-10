@@ -30,7 +30,7 @@ const supported = computed(() => full.value?.isSupported);
 </script>
 
 <template lang="pug">
-button(
+button.button(
   v-show="supported"
   @click="toggle()"
 )

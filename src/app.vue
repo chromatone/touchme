@@ -2,10 +2,16 @@
 import { useRafFn } from '@vueuse/core'
 import SimplexNoise from 'simplex-noise';
 import ColorHash from "color-hash";
+import scenes from '~pages'
+import { useScene, activeScene } from '~/use/scene';
+import { useMidi } from '~/use/midi'
 
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
+
+const { midi } = useMidi()
 
 const route = useRoute()
+const router = useRouter()
 
 const count = ref(0)
 
@@ -17,18 +23,32 @@ const { pause, resume } = useRafFn(() => {
   angle.value = simplex.noise2D(1, count.value / 2000);
 })
 
-
 const getColor = new ColorHash({
   saturation: [0.05, 0.28, 0.62],
   lightness: [0.75, 0.87, 0.9],
 })
-
 
 const color1 = computed(() => getColor.hex(Math.random() * 100000 + 'a'))
 const color2 = computed(() => getColor.hex(Math.random() * 100000 + 'b'))
 
 
 const background = computed(() => `linear-gradient(${angle.value * 360}deg, ${color1.value}, ${color2.value})`)
+
+const { visual, width, height } = useScene()
+
+watch(() => midi.total.hits, hits => {
+  if (hits == 0) {
+    router.push(randomScene().name)
+  }
+})
+
+function randomScene() {
+  let rnd = Math.random()
+  let scs = Object.values(scenes)
+  let index = rnd * (scs.length - 1)
+  return scs[Math.floor(index)]
+
+}
 
 </script>
 
@@ -37,10 +57,47 @@ const background = computed(() => `linear-gradient(${angle.value * 360}deg, ${co
   // (:style="{ background }"  )
   nav-bar
   synth-start
-  router-view(v-slot="{ Component }")
-    transition(name="fade" mode="out-in")
-      keep-alive
-        component#content(:is="Component")
+  .h-full.w-full 
+    svg#visual.h-full.w-full(
+      ref="visual"
+      version="1.1",
+      baseProfile="full",
+      :viewBox="`0 0  ${width} ${height}`",
+      xmlns="http://www.w3.org/2000/svg",
+    )
+
+      defs
+        filter#noiseFilter
+          feTurbulence(type="fractalNoise", basefrequency="6.29", numoctaves="6", stitchtiles="stitch").
+
+      rect(
+        filter="url(#noiseFilter)"
+        fill="hsl(20,70%,60%)"
+        opacity="0.1"
+        :width="width"
+        :height="height"
+      )
+
+      router-view(v-slot="{ Component }")
+        transition(name="fade" mode="out-in")
+          keep-alive
+            component#content(:is="Component")
+
+      scene-overlay
+
+    .absolute.left-0.top-10.flex.flex-col.gap-2.m-2.opacity-20.hover_opacity-100.transition
+      router-link.button.p-2.cursor-pointer.text-3xl( 
+        v-for="(scene, i) in scenes" :key="scene.path"
+        :to="scene"
+        :class="{ active: $route.path == scene.path }"
+        )
+        icon-la-plus(v-if="scene.name == 'cross'")
+        icon-ri-donut-chart-fill(v-if="scene.name == 'donut'")
+        icon-ph-plugs-connected(v-if="scene.name == 'index'")
+        icon-bx-tachometer(v-if="scene.name == 'level'")
+        icon-bi-flower1(v-if="scene.name == 'rose'")
+        icon-ic-outline-bar-chart(v-if="scene.name == 'stats'")
+
 //debug
 </template>
 
@@ -50,17 +107,23 @@ const background = computed(() => `linear-gradient(${angle.value * 360}deg, ${co
 }
 
 .nav {
-  @apply rounded-lg flex items-center flex-1  w-full bg-dark-50/40 hover_no-underline hover_shadow transition hover_bg-light-50/80;
+  @apply rounded-lg flex items-center flex-1 w-full bg-dark-50/40 hover_no-underline hover_shadow transition hover_bg-light-50/80;
 }
 
 .button {
-  @apply p-4 shadow flex transition flex-auto justify-center items-center rounded-xl bg-light-400 dark_bg-dark-500;
+  @apply p-4 shadow transition opacity-90 hover_opacity-100 flex transition flex-auto justify-center items-center rounded-xl bg-light-400 dark_bg-dark-500;
+
   &:hover {
     @apply bg-light-50 dark_bg-dark-50;
   }
+
   &.active {
-    @apply bg-light-200 dark_bg-dark-200;
+    @apply bg-dark-50 text-light-200 dark_bg-light-200 dark_text-dark-500;
   }
+}
+
+.panel {
+  @apply absolute p-4 m-4 bg-light-300 dark_bg-dark-300 z-20 flex flex-col gap-2 bg-opacity-90 dark_bg-opacity-90 flex items-center shadow-lg rounded-xl overflow-hidden right-2 bottom-2 max-w-sm sm_min-w-sm overflow-y-scroll max-h-80vh;
 }
 </style>
 

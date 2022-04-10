@@ -39,8 +39,8 @@ function cycleOctaves() {
 
 <template lang="pug">
 
-.panel
-  button.text-button.mute.p-2.flex.flex-col.items-center(
+.p-0
+  button.button.p-2.flex.flex-col.items-center(
     :class="{ active: synthOptions.initiated }"
     @click="synthOnce()" 
     aria-label="Test synth sound"
@@ -51,21 +51,16 @@ function cycleOctaves() {
     button.button(
       @click="cycle"
       aria-label="Synth panel"
-      ) Quantize {{ synthOptions.quantize }}
+      ) Quantize 
+      .font-bold.ml-2 {{ synthOptions.quantize }}
     button.button(
       @click="cycleOctaves()"
       aria-label="Synth panel"
-      ) Octave offset {{ synthOptions.octave }}
+      ) Octave shift 
+      .font-bold.ml-2 {{ synthOptions.octave }}
 </template>
 
 <style lang="postcss" scoped>
-.mute {
-  font-size: 1.1em;
-}
-
-.panel {
-  @apply p-4 m-4 bg-light-300 dark_bg-dark-300 z-20 flex flex-col bg-opacity-90 dark_bg-opacity-90 flex items-center shadow-lg;
-}
 </style>
 
 

@@ -16,23 +16,24 @@ function sortNotes(notes) {
 </script>
 
 <template lang='pug'>
-.flex.flex-col.gap-1.mb-8.overflow-x-scroll.p-4.font-mono
+.flex.flex-col.gap-1.mb-4.overflow-x-scroll.font-mono
   transition-group(name="fall" mode="out-in")
-    .flex.text-sm.fall.whitespace-nowrap(v-for="ev in midi.log" :key="ev")
-      .txt CH {{ ev.message?.channel }}
-      .txt {{ ev.message?.type }}
-      .txt {{ ev.data }}
+    .flex.text-xs.fall.whitespace-nowrap.justify-between(v-for="ev in midi.log" :key="ev")
       .p-2(:style="{ backgroundColor: pitchColor(ev.message.dataBytes[0] + 3 || 0) }")
-
-      .txt.whitespace-nowrap  {{ Utilities.toNoteIdentifier(ev.message.dataBytes[0] || 1) }}
+      .txt.whitespace-nowrap {{ Utilities.toNoteIdentifier(ev.message.dataBytes[0] || 1) }}
+      .txt {{ ev.message?.type }}
       .txt {{ ((ev.message.dataBytes[1]) / 127).toFixed(2) }}
+      .txt.text-center {{ ev.data.join(',') }}
+      .txt.text-right CH{{ ev.message?.channel }}
+
       
 </template>
 
 
 <style lang="postcss" scoped>
 .txt {
-  @apply p-1 flex-1;
+  @apply p-1;
+  flex: 10 1 30px;
 }
 </style>
 
