@@ -5,11 +5,13 @@ import ColorHash from "color-hash";
 import scenes from '~pages'
 import { useScene, activeScene } from '~/use/scene';
 import { useMidi } from '~/use/midi'
-
 import { useRoute, useRouter } from 'vue-router'
+import { onKeyStroke } from '@vueuse/core';
+import { init } from './use/synth';
+
+
 
 const { midi } = useMidi()
-
 const route = useRoute()
 const router = useRouter()
 
@@ -30,24 +32,27 @@ const getColor = new ColorHash({
 
 const color1 = computed(() => getColor.hex(Math.random() * 100000 + 'a'))
 const color2 = computed(() => getColor.hex(Math.random() * 100000 + 'b'))
-
-
 const background = computed(() => `linear-gradient(${angle.value * 360}deg, ${color1.value}, ${color2.value})`)
 
 const { visual, width, height } = useScene()
 
 watch(() => midi.total.hits, hits => {
   if (hits == 0) {
-    router.push(randomScene().name)
+    router.push(randomScene())
   }
+})
+
+onKeyStroke([' ', 'Enter'], () => {
+  init()
+  router.push(randomScene())
 })
 
 function randomScene() {
   let rnd = Math.random()
   let scs = Object.values(scenes)
   let index = rnd * (scs.length - 1)
-  return scs[Math.floor(index)]
-
+  let path = scs[Math.floor(index)].path
+  return path
 }
 
 </script>
@@ -65,26 +70,21 @@ function randomScene() {
       :viewBox="`0 0  ${width} ${height}`",
       xmlns="http://www.w3.org/2000/svg",
     )
-
       defs
         filter#noiseFilter
           feTurbulence(type="fractalNoise", basefrequency="6.29", numoctaves="6", stitchtiles="stitch").
-
       rect(
         filter="url(#noiseFilter)"
         fill="hsl(20,70%,60%)"
         opacity="0.1"
         :width="width"
         :height="height"
-      )
-
+        )
       router-view(v-slot="{ Component }")
         transition(name="fade" mode="out-in")
           keep-alive
             component#content(:is="Component")
-
       scene-overlay
-
     .absolute.left-0.top-10.flex.flex-col.gap-2.m-2.opacity-20.hover_opacity-100.transition
       router-link.button.p-2.cursor-pointer.text-3xl( 
         v-for="(scene, i) in scenes" :key="scene.path"
@@ -97,7 +97,6 @@ function randomScene() {
         icon-bx-tachometer(v-if="scene.name == 'level'")
         icon-bi-flower1(v-if="scene.name == 'rose'")
         icon-ic-outline-bar-chart(v-if="scene.name == 'stats'")
-
 //debug
 </template>
 

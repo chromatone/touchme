@@ -18,6 +18,21 @@ g.text-overlay
       x="8"
       y="12"
     )
+  g(:transform="`translate(${width - width / 3},22)`")
+    rect(
+      width="50"
+      height="10"
+      stroke="currentColor"
+      fill="none"
+      rx="4"
+    )
+    rect(
+      :transform="`scale(${midi.duration / midi.maxDuration},1)`"
+      width="50"
+      height="10"
+      fill="currentColor"
+      rx="4"
+    )
   text(
     text-anchor="middle"
     fill="currentColor"
