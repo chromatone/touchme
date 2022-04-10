@@ -1,28 +1,32 @@
 <script setup>
 import { init, synthOptions } from '~/use/synth'
 import { midi } from '~/use/midi'
+import { useStorage } from '@vueuse/core';
+
+
 const started = ref(false)
 
 const steps = reactive({
   browser: {
-    text: 'MIDI enabled browser on a desktop, tablet of a smartphone',
-    checked: computed(() => midi?.enabled)
+    text: 'MIDI enabled browser',
+    checked: computed(() => midi?.enabled),
+    disabled: true
   },
   controller: {
     text: 'TouchMe (or any other MIDI controller)',
-    checked: false
+    checked: useStorage('touch-me', false)
   },
   usb: {
     text: "USB cable (you have it in your package)",
-    checked: false
+    checked: useStorage('usb-cable', false)
   },
   adapter: {
     text: "Special adapter, if your device doesn’t have a usb port ",
-    checked: false,
+    checked: useStorage('usb-adapter', false)
   },
   friend: {
     text: "Your best friend ",
-    checked: false,
+    checked: useStorage('your-friend', false)
   }
 })
 
@@ -48,8 +52,9 @@ const steps = reactive({
       .ml-2 Other options
 
   .px-4(v-else)
+
     .flex.items-center.my-4(v-for="(step, name) in steps" :key="name")
-      input.transform.scale-200(type="checkbox" :id="name" v-model="step.checked") 
+      input.transform.scale-200(type="checkbox" :disabled="step.disabled" :id="name" v-model="step.checked") 
       label.ml-4(:for="name") {{ step.text }}
     button.button.mx-auto.w-full.font-bold(@click="init(); started = true") Start
 </template>

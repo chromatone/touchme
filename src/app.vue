@@ -36,6 +36,8 @@ const background = computed(() => `linear-gradient(${angle.value * 360}deg, ${co
 
 const { visual, width, height } = useScene()
 
+const changed = ref(false)
+
 watch(() => midi.total.hits, hits => {
   if (hits == 0) {
     router.push(randomScene())
@@ -52,6 +54,7 @@ function randomScene() {
   let scs = Object.values(scenes)
   let index = rnd * (scs.length - 1)
   let path = scs[Math.floor(index)].path
+  changed.value = true
   return path
 }
 
@@ -61,7 +64,9 @@ function randomScene() {
 .flex.flex-col.h-100vh.w-full 
   // (:style="{ background }"  )
   nav-bar
-  synth-start
+  .absolute.bottom-2.text-center.flex.flex-col.items-center.w-full(v-if="!changed")
+    .text-sm Hold any note more than {{ midi.maxDuration / 1000 }} seconds or press Enter/Spacebar to randomly change current scene.
+  scene-start
   .h-full.w-full 
     svg#visual.h-full.w-full(
       ref="visual"
