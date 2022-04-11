@@ -50,10 +50,15 @@ onKeyStroke([' ', 'Enter'], () => {
 })
 
 function randomScene() {
-  let rnd = Math.random()
-  let scs = Object.values(scenes)
-  let index = rnd * (scs.length - 1)
-  let path = scs[Math.floor(index)].path
+  let rnd, scs, index, path
+  for (let i = 0; i < 20; i++) {
+    rnd = Math.random()
+    scs = Object.values(scenes)
+    index = rnd * (scs.length)
+    path = scs[Math.floor(index)].path
+    if (!route.path.includes(path)) break
+  }
+
   changed.value = true
   return path
 }
