@@ -2,6 +2,9 @@
 import { midi } from '~/use/midi';
 import { useScene } from '~/use/scene';
 const { width, height } = useScene()
+
+const acc = 200
+
 </script>
 
 <template lang='pug'>
@@ -18,17 +21,19 @@ g.text-overlay
       x="8"
       y="12"
     )
-  g(:transform="`translate(${width - width / 3},22)`")
+  g(:transform="`translate(${width / 2},${height - 60})`" opacity="0.7")
     rect(
-      width="50"
+      :x="-acc / 2"
+      :width="acc"
       height="10"
       stroke="currentColor"
       fill="none"
       rx="4"
     )
     rect(
+      :x="-acc / 2"
+      :width="acc"
       :transform="`scale(${midi.duration / midi.maxDuration},1)`"
-      width="50"
       height="10"
       fill="currentColor"
       rx="4"

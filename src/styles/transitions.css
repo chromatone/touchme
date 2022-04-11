@@ -123,5 +123,9 @@
   transform: translatey(-10px);
 }
 
+.dark .fall-enter-from {
+  background-color: black;
+}
+
 
 

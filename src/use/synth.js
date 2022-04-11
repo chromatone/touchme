@@ -1,6 +1,7 @@
 import { PolySynth, MonoSynth, start, now, Midi, Transport, Reverb, Frequency, AutoPanner, FeedbackDelay } from 'tone'
 import { midi } from './midi'
 import { useStorage } from '@vueuse/core'
+import { onKeyDown } from '@vueuse/core'
 
 export const synth = {}
 
@@ -35,8 +36,18 @@ export const synthOptions = reactive({
   }
 })
 
+
+
 export function useSynth() {
   if (!synthOptions.initiated) {
+
+    onKeyDown('zя'.split(''), (ev) => {
+      synthOptions.octave--
+    })
+    onKeyDown('xч'.split(''), (ev) => {
+      synthOptions.octave++
+    })
+
     Transport.bpm.set(synthOptions.bpm);
     Transport.start();
 

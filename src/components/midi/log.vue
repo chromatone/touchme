@@ -16,7 +16,7 @@ function sortNotes(notes) {
 </script>
 
 <template lang='pug'>
-.flex.flex-col.gap-1.mb-4.overflow-x-scroll.font-mono
+.flex.flex-col.gap-1.mb-4.overflow-x-scroll.font-mono.pt-4
   transition-group(name="fall" mode="out-in")
     .flex.text-xs.fall.whitespace-nowrap.justify-between(v-for="ev in midi.log" :key="ev")
       .p-2(:style="{ backgroundColor: pitchColor(ev.message.dataBytes[0] + 3 || 0) }")

@@ -1,5 +1,6 @@
 import { WebMidi, Note } from "webmidi";
 import { useStorage, useRafFn, onKeyDown, onKeyUp } from "@vueuse/core";
+import { synthOptions } from "./synth";
 
 
 export const midi = reactive({
@@ -40,33 +41,32 @@ export const midi = reactive({
 });
 
 
-
-
 export function useKeyboard() {
   const noteKeys = {
-    'aAфФ': { note: 'C', offset: 0 },
-    'wWцЦ': { note: 'C#', offset: 0 },
-    'sSыЫ': { note: 'D', offset: 0 },
-    'уУeE': { note: 'D#', offset: 0 },
-    'dDвВ': { note: 'E', offset: 0 },
-    'fFаА': { note: 'F', offset: 0 },
-    'tTеЕ': { note: 'F#', offset: 0 },
-    'gGпП': { note: 'G', offset: 0 },
-    'yYнН': { note: 'G#', offset: 0 },
-    'hHрР': { note: 'A', offset: 0 },
-    'uUгГ': { note: 'A#', offset: 0 },
-    'jJоО': { note: 'B', offset: 0 },
-    'kKлЛ': { note: 'C', offset: 1 },
-    'oOщЩ': { note: 'C#', offset: 1 },
-    'lLдД': { note: 'D', offset: 1 },
-    'pPзЗ': { note: 'D#', offset: 1 },
-    ';:жЖ': { note: 'E', offset: 1 },
-    '\'\"эЭ': { note: 'F', offset: 1 },
-    ']}ъЪ': { note: 'F#', offset: 1 },
-    '\\\|ёЁ': { note: 'G', offset: 1 },
+    'aф': { note: 'C', offset: 0 },
+    'wц': { note: 'C#', offset: 0 },
+    'sы': { note: 'D', offset: 0 },
+    'уe': { note: 'D#', offset: 0 },
+    'dв': { note: 'E', offset: 0 },
+    'fа': { note: 'F', offset: 0 },
+    'tе': { note: 'F#', offset: 0 },
+    'gп': { note: 'G', offset: 0 },
+    'yн': { note: 'G#', offset: 0 },
+    'hр': { note: 'A', offset: 0 },
+    'uг': { note: 'A#', offset: 0 },
+    'jо': { note: 'B', offset: 0 },
+    'kл': { note: 'C', offset: 1 },
+    'oщ': { note: 'C#', offset: 1 },
+    'lд': { note: 'D', offset: 1 },
+    'pз': { note: 'D#', offset: 1 },
+    ';ж': { note: 'E', offset: 1 },
+    '\'э': { note: 'F', offset: 1 },
+    ']ъ': { note: 'F#', offset: 1 },
+    '\\ё': { note: 'G', offset: 1 },
   }
 
   onKeyDown('Enter', () => midi.total.reset())
+
 
   function playMidi(name, offset, off) {
     const note = new Note(name + (4 + offset + midi.offset), { attack: off ? 0 : 1 })

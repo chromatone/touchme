@@ -1,8 +1,6 @@
 <script setup>
 import { midi, stopAll, midiAttack, midiRelease } from '~/use/midi.js'
 import { onKeyStroke } from '@vueuse/core'
-import { pitchColor } from '~/use/chromatone'
-import { synthOptions } from '~/use/synth.js'
 
 const props = defineProps({
   toChannel: {
@@ -19,7 +17,7 @@ onKeyStroke(' ', ev => {
 
 <template lang="pug">
 .z-40.flex.flex-col.gap-2
-  .p-2.border.border-red-500.text-red-500(v-if="!midi.enabled") MIDI is not available. Use a 
+  .p-2.border.border-red-500.text-red-500(v-if="!midi?.enabled") MIDI is not available. Use a 
     a.font-normal.underline(href="https://caniuse.com/?search=midi" target="_blank") compatible browser 
     span or 
     a.font-normal.underline(href="https://apps.apple.com/ru/app/web-midi-browser/id953846217" target="_blank") Web MIDI Browser on iOS
@@ -30,7 +28,7 @@ onKeyStroke(' ', ev => {
       v-for="(input, iid) in midi.inputs" 
       :key="iid"
       )
-  midi-log.max-h-40vh
+  midi-log.max-h-40vh.mt-6
 </template>
 
 <style lang="postcss" scoped>
