@@ -4,7 +4,7 @@ import SimplexNoise from 'simplex-noise';
 import ColorHash from "color-hash";
 import scenes from '~pages'
 import { useScene, activeScene } from '~/use/scene';
-import { useMidi } from '~/use/midi'
+import { useMidi, useKeyboard } from '~/use/midi'
 import { useRoute, useRouter } from 'vue-router'
 import { onKeyStroke } from '@vueuse/core';
 import { init } from './use/synth';
@@ -57,6 +57,8 @@ function randomScene() {
   changed.value = true
   return path
 }
+
+useKeyboard()
 
 </script>
 

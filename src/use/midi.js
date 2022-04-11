@@ -1,6 +1,5 @@
-import { WebMidi } from "webmidi";
-import { useStorage, useRafFn } from "@vueuse/core";
-
+import { WebMidi, Note } from "webmidi";
+import { useStorage, useRafFn, onKeyDown, onKeyUp } from "@vueuse/core";
 
 
 export const midi = reactive({
@@ -39,6 +38,60 @@ export const midi = reactive({
     }
   }
 });
+
+
+
+
+export function useKeyboard() {
+  const noteKeys = {
+    'aAфФ': { note: 'C', offset: 0 },
+    'wWцЦ': { note: 'C#', offset: 0 },
+    'sSыЫ': { note: 'D', offset: 0 },
+    'уУeE': { note: 'D#', offset: 0 },
+    'dDвВ': { note: 'E', offset: 0 },
+    'fFаА': { note: 'F', offset: 0 },
+    'tTеЕ': { note: 'F#', offset: 0 },
+    'gGпП': { note: 'G', offset: 0 },
+    'yYнН': { note: 'G#', offset: 0 },
+    'hHрР': { note: 'A', offset: 0 },
+    'uUгГ': { note: 'A#', offset: 0 },
+    'jJоО': { note: 'B', offset: 0 },
+    'kKлЛ': { note: 'C', offset: 1 },
+    'oOщЩ': { note: 'C#', offset: 1 },
+    'lLдД': { note: 'D', offset: 1 },
+    'pPзЗ': { note: 'D#', offset: 1 },
+    ';:жЖ': { note: 'E', offset: 1 },
+    '\'\"эЭ': { note: 'F', offset: 1 },
+    ']}ъЪ': { note: 'F#', offset: 1 },
+    '\\\|ёЁ': { note: 'G', offset: 1 },
+  }
+
+  onKeyDown('Enter', () => midi.total.reset())
+
+  function playMidi(name, offset, off) {
+    const note = new Note(name + (4 + offset + midi.offset), { attack: off ? 0 : 1 })
+    const ev = {
+      type: off ? 'noteoff' : 'noteon',
+      note,
+      port: { id: 'PC Keyboard' },
+      timestamp: midi.time,
+      target: { number: 0 },
+    }
+    noteInOn(ev)
+  }
+  for (let keys in noteKeys) {
+    onKeyDown(keys.split(''), (ev) => {
+      if (ev.repeat) return
+      playMidi(noteKeys[keys].note, noteKeys[keys].offset)
+    })
+    onKeyUp(keys.split(''), (ev) => {
+      if (ev.repeat) return
+      playMidi(noteKeys[keys].note, noteKeys[keys].offset, true)
+    })
+  }
+
+}
+
 
 
 const { pause, resume } = useRafFn(() => {
@@ -143,9 +196,7 @@ function initMidi() {
     })
     input.addListener("noteon", (ev) => {
       midi.inputs[input.id].note = noteInOn(ev)
-      midi.total.hits++
-      let pitch = (ev.note.number + 3) % 12;
-      midi.total.notes[pitch] = midi.total.notes[pitch] + 1
+
     }, {
       channels: "all",
     });
@@ -187,6 +238,9 @@ function noteInOn(ev) {
     note.velocity = 0;
   } else {
     note.velocity = 100;
+    midi.total.hits++
+    let pitch = (ev.note.number + 3) % 12;
+    midi.total.notes[pitch] = midi.total.notes[pitch] + 1
   }
   note.pitch = (note.number + 3) % 12;
   note.octA = Math.floor((note.number + 3) / 12) - 1;
@@ -317,3 +371,4 @@ export function forwardMidi(iid, oid) {
     delete midi.forwards?.[iid]?.[oid];
   }
 }
+

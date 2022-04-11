@@ -13,7 +13,7 @@ g.cross
     :y="0"
     :height="height"
     :width="100"
-    :style="`transform: scale(${midi.duration / 500}, 1)`"
+    :style="`transform: scale(${midi.duration / 100}, 1)`"
     :transform-origin="`${width / 2} ${0}`"
     :fill="pitchColor(midi?.note?.pitch - 24 + 7)"
   )
@@ -24,7 +24,7 @@ g.cross
     :y1="0"
     :y2="0"
     :stroke="pitchColor(midi?.note?.pitch)"
-    :stroke-width="midi.duration / 5"
+    :stroke-width="midi.duration"
     :transform-origin="`${width / 2} ${0}`"
     :style="`transform: translateY(${(127 - midi?.note?.number) / 127 * height || 0}px)`"
   )
