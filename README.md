@@ -52,19 +52,16 @@
 3. Run the dev script with `pnpm run dev` and visit the localhost address for development and tests
 4. Run the build script with `pnpm run build` and have the `dist` folder ready to upload to your static file web hosting.
 
-### How to host it at your Github pages (with custom domain)
+### How to add scenes
 
-1. Read the [GitHub pages documentation](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages)
-2. Fork the repo
-3. Change the line 4 in the `deploy.sh` file according to your repository address
-
-```
-git remote add origin git@github.com:YourGitHubAccount/touchme.git
-```
-
-4. Change the contents of `public/CNAME` file to match the subdomain you want the app to be accessible at
-5. Run `pnpm run build` to build the app to `dist/` folder
-6. Run the `pnpm run deploy` to upload the built site to the `gh-pages` branch of your repo
-7. Go to your repository settings and configure the GitHub pages.
-8. Add a CNAME DNS record for your subdomain to `<user>.github.io`
-9. Enjoy your self-hosted version of the experience.
+1. Fork the repo
+2. Create a Vue 3 component inside the `src/scenes/` folder
+3. The template should contain valid SVG code to be embedded into the main scene
+4. Import and use all the interfaces for MIDI, synth, colors and more from `'~/use/'` folder
+5. Use present scenes as examples
+6. You may use `pug` and `windicss` or prefer plain `html` templates and `css` styles
+7. Add a line to the `app.vue` with Iconify icon and the scene file name like this
+   `icon-ri-donut-chart-fill(v-if="scene.name == 'donut'")`
+8. Push you component to your GitHub repo
+9. Create a Pull Request with the changes to this repo to share it
+10. We will check your code and, if everything is fine, the updated version of the experience will be deployed to the main site.
