@@ -1,6 +1,6 @@
 # The interactive playground
 
-Audio-visual [Chromatone](https://chromatone.center) web-experience for [Touch Me](https://shop.playtronica.com/products/touchme) - the tactile MIDI instrument by [Playtronica](https://playtronica.com).
+[Chromatone](https://chromatone.center) audio-visual web-experience for [Touch Me](https://shop.playtronica.com/products/touchme) - the tactile MIDI instrument by [Playtronica](https://playtronica.com).
 
 ## How to play
 
@@ -35,13 +35,6 @@ Audio-visual [Chromatone](https://chromatone.center) web-experience for [Touch M
 - [pug](https://pugjs.org/api/getting-started.html) - the neat version of HTML
 - [windi css](https://windicss.org/) - the neat version of CSS
 
-### How run and build the app locally
-
-1. Clone this repo to your computer
-2. Run `pnpm i` to install all project dependencies (You may need to [install pnpm](https://pnpm.io/installation) before)
-3. Run the dev script with `pnpm run dev` and visit the localhost address for development and tests
-4. Run the build script with `pnpm run build` and have the `dist` folder ready to upload to your static file web hosting.
-
 ### App structure
 
 - `public/` - the files to be copied to the root of the built site
@@ -52,17 +45,26 @@ Audio-visual [Chromatone](https://chromatone.center) web-experience for [Touch M
   - `app.vue` - the main scene SVG and overlays
   - `main.js` - the Vite app entry point
 
-### Host at your Github pages (with custom domain)
+### How run and build the app locally
 
-1. Fork the repo
-2. Change the line 4 in the `deploy.sh` file according to your repository address
+1. Clone this repo to your computer
+2. Run `pnpm i` to install all project dependencies (You may need to [install pnpm](https://pnpm.io/installation) before)
+3. Run the dev script with `pnpm run dev` and visit the localhost address for development and tests
+4. Run the build script with `pnpm run build` and have the `dist` folder ready to upload to your static file web hosting.
+
+### How to host it at your Github pages (with custom domain)
+
+1. Read the [GitHub pages documentation](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages)
+2. Fork the repo
+3. Change the line 4 in the `deploy.sh` file according to your repository address
 
 ```
 git remote add origin git@github.com:YourGitHubAccount/touchme.git
 ```
 
-3. Change the contents of `public/CNAME` file to match the subdomain you want the app to be accessible at
-4. Run `pnpm run build` to build the app to `dist/` folder
-5. Run the `pnpm run deploy` to upload the built site to the `gh-pages` branch of your repo
-6. Go to your repository settings and configure the GitHub pages.
-7. Enjoy your self-hosted version of the experience.
+4. Change the contents of `public/CNAME` file to match the subdomain you want the app to be accessible at
+5. Run `pnpm run build` to build the app to `dist/` folder
+6. Run the `pnpm run deploy` to upload the built site to the `gh-pages` branch of your repo
+7. Go to your repository settings and configure the GitHub pages.
+8. Add a CNAME DNS record for your subdomain to `<user>.github.io`
+9. Enjoy your self-hosted version of the experience.
