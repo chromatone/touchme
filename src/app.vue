@@ -70,10 +70,10 @@ useKeyboard()
 <template lang="pug">
 .flex.flex-col.h-100vh.w-full 
   // (:style="{ background }"  )
-  nav-bar
+  state-overlay
   .absolute.bottom-2.text-center.flex.flex-col.items-center.w-full(v-if="!changed")
     .text-sm Hold any note more than {{ midi.maxDuration / 1000 }} seconds or press Enter/Spacebar to randomly change current scene.
-  scene-start
+  state-start
   .h-full.w-full 
     svg#visual.h-full.w-full(
       ref="visual"
@@ -96,7 +96,7 @@ useKeyboard()
         transition(name="fade" mode="out-in")
           keep-alive
             component#content(:is="Component")
-      scene-overlay
+      scene-stats
     .absolute.left-0.top-10.flex.flex-col.gap-2.m-2.opacity-20.hover_opacity-100.transition
       router-link.button.p-2.cursor-pointer.text-3xl( 
         v-for="(scene, i) in scenes" :key="scene.path"

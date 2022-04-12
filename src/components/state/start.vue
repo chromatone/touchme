@@ -33,7 +33,7 @@ const steps = reactive({
 </script>
 
 <template lang='pug'>
-.absolute.z-500.p-4.rounded-xl.shadow-xl.bg-light-200.mx-auto.dark_bg-dark-200.min-w-80(
+.text-center.absolute.z-500.p-4.rounded-xl.shadow-xl.bg-light-200.mx-auto.dark_bg-dark-200.min-w-80(
   style="left: 50%; top: 50%; transform: translate(-50%, -50%);"
   v-if="!synthOptions.initiated"
   )
@@ -50,13 +50,13 @@ const steps = reactive({
     a.button.p-4.flex.items-center(href="https://caniuse.com/?search=midi" target="_blank")
       icon-ic-baseline-checklist.text-2xl
       .ml-2 Other options
-
+    .mt-4 Or play notes with your PC keyboard 
   .px-4(v-else)
 
     .flex.items-center.my-4(v-for="(step, name) in steps" :key="name")
       input.transform.scale-200(type="checkbox" :disabled="step.disabled" :id="name" v-model="step.checked") 
       label.ml-4(:for="name") {{ step.text }}
-    button.button.mx-auto.w-full.font-bold(@click="init(); started = true") Start
+  button.button.mx-auto.w-full.font-bold(@click="init(); started = true") Start
 </template>
 
 <style lang="postcss" scoped>

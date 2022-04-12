@@ -41,7 +41,7 @@ export default defineConfig({
     }),
     Pages({
       dirs: [
-        { dir: "src/pages", baseRoute: "." },
+        { dir: "src/scenes", baseRoute: "." },
       ],
       routeBlockLang: 'yaml',
       exclude: ['**/node_modules/**/*.*'],
