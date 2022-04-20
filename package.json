@@ -16,7 +16,8 @@
     "dev": "vite --host --port 3442",
     "build": "vite build ",
     "serve": "vite preview --port 3400",
-    "deploy": "sh deploy.sh"
+    "deploy": "sh deploy.sh",
+    "start": "cd server && pnpm run server"
   },
   "dependencies": {
     "@tonaljs/tonal": "^4.6.5",

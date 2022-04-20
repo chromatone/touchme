@@ -2,7 +2,7 @@
 
 [Chromatone](https://chromatone.center) audio-visual web-experience for [Touch Me](https://shop.playtronica.com/products/touchme) - the tactile MIDI instrument by [Playtronica](https://playtronica.com).
 
-## How to play
+## How to start
 
 - Open any [WebMIDI enabled browser](https://caniuse.com/?search=midi) on any device
 - Connect a MIDI-controller via USB, Bluetooth or DIN to the device
@@ -10,7 +10,7 @@
 - Play notes and collect stats
 - Hold any note for 3 seconds to have scene change randomly.
 
-## What to try
+## What to play with
 
 - **Swap scenes** with icon buttons to the left. Scenes change randomly after any note being held for over 3 seconds, or pressing Spacebar or Enter key.
 - **Quantize notes** to 1/8, 1/16, 1/32 or free time with the bottom-left button.
@@ -47,7 +47,7 @@
 
 ### How run and build the app locally
 
-1. Clone this repo to your computer
+1. Clone this repo to a folder on your computer
 2. Run `pnpm i` to install all project dependencies (You may need to [install pnpm](https://pnpm.io/installation) before)
 3. Run the dev script with `pnpm run dev` and visit the localhost address for development and tests
 4. Run the build script with `pnpm run build` and have the `dist` folder ready to upload to your static file web hosting.
@@ -65,3 +65,11 @@
 8. Push you component to your GitHub repo
 9. Create a Pull Request with the changes to this repo to share it
 10. We will check your code and, if everything is fine, the updated version of the experience will be deployed to the main site.
+
+
+## Roadmap
+
+- [ ] Audio recorder
+- [ ] MIDI recorder
+- [ ] Achievements
+- [ ] Global statistics server

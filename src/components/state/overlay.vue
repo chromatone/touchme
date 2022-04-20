@@ -22,6 +22,7 @@ function cycle() {
   .flex-0.flex.flex-col.gap-1
     state-fullscreen
     state-dark
+    stats-button
   .flex-auto
   .flex-0.flex.flex-col.items-center.gap-2
     midi-state
@@ -31,7 +32,6 @@ function cycle() {
     aria-label="Synth panel"
     ) {{ synthOptions.octave > 0 ? '+' : '' }}{{ synthOptions.octave }}
     button.button.font-bold.text-sm.w-16.select-none(
-
       @click="cycle"
       aria-label="Synth panel"
       ) {{ synthOptions.quantize }}

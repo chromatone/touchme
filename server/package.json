@@ -1,0 +1,12 @@
+{
+  "name": "touchme-server",
+  "private": true,
+  "module": "true",
+  "scripts": {
+    "server": "node index.mjs"
+  },
+  "devDependencies": {
+    "json-server": "^0.17.0",
+    "json-server-auth": "^2.1.0"
+  }
+}
