@@ -4,16 +4,13 @@ import { nanoid } from 'nanoid'
 import ms from 'ms';
 
 export const server = reactive({
-  url: 'https://powerful-scented-galley.glitch.me',
-  // url: 'http://localhost:2042',
   accessToken: null,
   nid: useStorage('stats-nid'),
   open: false
 })
 
 export const useMyFetch = createFetch({
-  baseUrl: 'http://powerful-scented-galley.glitch.me',
-  // baseUrl: 'http://localhost:2042',
+  baseUrl: import.meta.env.PROD ? 'http://powerful-scented-galley.glitch.me' : 'http://localhost:2042',
   options: {
     async beforeFetch({ options }) {
       options.headers = options.headers || {}

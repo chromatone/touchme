@@ -47,4 +47,4 @@ wiki/
 **/.obsidian/
 
 # The actual db data
-stats/db.json
+db.json
