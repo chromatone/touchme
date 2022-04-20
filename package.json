@@ -12,6 +12,7 @@
     "type": "git",
     "url": "https://github.com/chromatone/touchme.git"
   },
+  "module": "true",
   "scripts": {
     "dev": "vite --host --port 3442",
     "build": "vite build ",
