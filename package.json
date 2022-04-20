@@ -17,15 +17,14 @@
     "dev": "vite --host --port 3442",
     "build": "vite build ",
     "serve": "vite preview --port 3400",
-    "deploy": "sh deploy.sh",
-    "start": "cd stats && pnpm run server"
+    "deploy": "sh deploy.sh"
   },
   "dependencies": {
     "@tonaljs/tonal": "^4.6.5",
     "@tonejs/midi": "^2.0.28",
-    "@vueuse/core": "^8.2.3",
+    "@vueuse/core": "^8.2.6",
     "@vueuse/gesture": "^1.0.0",
-    "cobe": "^0.4.2",
+    "cobe": "^0.5.0",
     "color-hash": "^2.0.1",
     "colord": "^2.9.2",
     "hidpi-canvas": "^1.0.10",
@@ -34,25 +33,26 @@
     "simplex-noise": "^3.0.1",
     "tone": "^14.8.38",
     "vitepress-pages": "^0.8.5",
-    "vue": "^3.2.31",
-    "webmidi": "^3.0.15",
-    "vue-router": "^4.0.14"
+    "vue": "^3.2.33",
+    "vue-router": "^4.0.14",
+    "webmidi": "^3.0.19",
+    "nanoid": "^3.3.3"
   },
   "devDependencies": {
-    "@iconify/json": "^2.1.23",
+    "@iconify/json": "^2.1.30",
+    "@vitejs/plugin-vue": "^2.3.1",
     "markdown-it-external-links": "^0.0.6",
     "patch-vue-directive-ssr": "^0.0.1",
     "pug": "3.0.2",
-    "unplugin-auto-import": "^0.6.9",
+    "unplugin-auto-import": "^0.7.1",
     "unplugin-icons": "^0.14.1",
-    "unplugin-vue-components": "^0.18.5",
-    "vite": "2.9.1",
-    "@vitejs/plugin-vue": "^2.3.1",
+    "unplugin-vue-components": "^0.19.3",
+    "vite": "2.9.5",
     "vite-aliases": "0.9.2",
-    "vite-plugin-pages": "^0.22.0",
-    "vite-plugin-pages-sitemap": "^1.2.0",
-    "vite-plugin-pwa": "^0.11.13",
-    "vite-plugin-windicss": "^1.8.3",
+    "vite-plugin-pages": "^0.23.0",
+    "vite-plugin-pages-sitemap": "^1.2.2",
+    "vite-plugin-pwa": "^0.12.0",
+    "vite-plugin-windicss": "^1.8.4",
     "windicss": "3.5.1"
   }
 }
