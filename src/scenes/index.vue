@@ -57,8 +57,9 @@ svg#visual.h-full(
   )
   line(
     style="transition: stroke-width 0.2s ease-out;"
-    :stroke-width="midi?.note?.number * midi?.note?.velocity / 200"
+    :stroke-width="midi?.note?.number * midi?.note?.velocity / 200 * midi.duration / 100"
     :stroke="pitchColor(midi?.note?.number - 21)"
+    stroke-linecap="round"
     :x1="actors[0].x * width"
     :x2="actors[1].x * width"
     :y1="actors[0].y * height"
@@ -66,14 +67,15 @@ svg#visual.h-full(
   )
 
   g(
+    style="transition: transform 0.1s ease-out;"
     v-for="actor in actors" :key="actor"
-    :transform="`translate(${actor.x * width},${actor.y * height}) rotate(${actor.angle * 360})`"
+    :style="`transform: translate(${actor.x * width}px,${actor.y * height}px) rotate(${actor.angle * 360}deg) scale(${midi.duration / 1000 + 1})`"
     )
-    circle(
-      opacity="0.5"
-      r="40"
-      filter="url(#blur)"
-    )
+    //- circle(
+    //-   opacity="0.5"
+    //-   r="40"
+    //-   filter="url(#blur)"
+    //- )
     circle(
       stroke-width="2"
       stroke="white"

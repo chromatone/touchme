@@ -72,3 +72,9 @@ export const getColor = new ColorHash({
   saturation: [0.05, 0.18, 0.82],
   lightness: [0.65, 0.87, 0.9],
 })
+
+
+export const userColor = new ColorHash({
+  saturation: [0.65, 0.78, 0.92],
+  lightness: [0.65, 0.87, 0.9],
+})

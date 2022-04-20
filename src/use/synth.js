@@ -10,7 +10,7 @@ export const synth = {}
 export const synthOptions = reactive({
   midi: true,
   bpm: useClamp(useStorage("tempo-bpm", 100), 10, 500),
-  quantize: '@16n',
+  quantize: '@8n',
   octave: useClamp(useStorage("synth-transpose", 0), -2, 2),
   transpose: computed(() => synthOptions.octave * 12),
   initiated: false,
@@ -85,7 +85,6 @@ export function init() {
   synth.poly.connect(synth.delay)
   synth.poly.connect(synth.pan)
   synth.pan.start()
-
 
   synthOptions.initiated = true
 }

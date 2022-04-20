@@ -1,8 +1,9 @@
 <script setup>
-import { synthOptions } from '../../use/synth';
+
+import { synthOptions } from '~/use/synth';
 
 const octaves = [-2, -1, 0, 1, 2]
-const modes = ['+0', '@16n', '@32n', '@8n']
+const modes = ['+0', '@8n', '@16n', '@32n']
 
 function cycleOctaves() {
   let oct = octaves.findIndex(el => el == synthOptions.octave)
@@ -13,6 +14,9 @@ function cycle() {
   let mode = modes.findIndex(el => el == synthOptions.quantize)
   synthOptions.quantize = modes[++mode % (modes.length)]
 }
+
+
+
 
 
 </script>

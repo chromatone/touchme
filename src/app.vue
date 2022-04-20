@@ -8,7 +8,7 @@ import { useMidi, useKeyboard } from '~/use/midi'
 import { useRoute, useRouter } from 'vue-router'
 import { onKeyStroke } from '@vueuse/core';
 import { init } from './use/synth';
-
+import { server } from './use/stats';
 
 
 const { midi } = useMidi()
@@ -74,6 +74,8 @@ useKeyboard()
   .absolute.bottom-2.text-center.flex.flex-col.items-center.w-full(v-if="!changed")
     .text-sm Hold any note more than {{ midi.maxDuration / 1000 }} seconds or press Enter/Spacebar to randomly change current scene.
   state-start
+  transition(name="fade")
+    stats-panel()
   .h-full.w-full 
     svg#visual.h-full.w-full(
       ref="visual"
