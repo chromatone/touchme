@@ -76,7 +76,7 @@ useKeyboard()
   state-start
   transition(name="fade")
     stats-panel()
-  .h-full.w-full 
+  .h-full.w-full
     svg#visual.h-full.w-full(
       ref="visual"
       version="1.1",

@@ -1,8 +1,7 @@
 <script setup>
-import { server, useUserSession, useUser } from '~/use/stats';
+import { server, useUser } from '~/use/stats';
 
 const user = useUser()
-const session = useUserSession()
 
 </script>
 

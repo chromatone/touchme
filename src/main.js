@@ -21,6 +21,8 @@ const router = createRouter({
 });
 
 const app = createApp(App);
+app.use(router)
 
-app.use(router).mount("#touchme-app");
-
+setTimeout(() => {
+  app.mount("#touchme-app");
+}, 500)

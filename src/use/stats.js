@@ -10,7 +10,7 @@ export const server = reactive({
 })
 
 export const useMyFetch = createFetch({
-  baseUrl: import.meta.env.PROD ? 'http://powerful-scented-galley.glitch.me' : 'http://localhost:2042',
+  baseUrl: import.meta.env.PROD ? 'https://powerful-scented-galley.glitch.me' : 'http://localhost:2042',
   options: {
     async beforeFetch({ options }) {
       options.headers = options.headers || {}
@@ -33,7 +33,7 @@ export function useUser() {
   if (!user.value.id) {
     enter()
     useIntervalFn(() => {
-      const { data } = useMyFetch(`users/${user.value.id}`).patch({
+      const { data } = useMyFetch(`users/${user.value?.id}`).patch({
         pulse: Date.now()
       }).json()
 

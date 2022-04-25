@@ -8,7 +8,6 @@ html {
 }
 
 body {
-  @apply bg-light-600 dark_(bg-dark-600) transition-all duration-600 ease-out text-dark-50 dark_text-light-300 ;
   min-width: 320px;
   min-height: 100vh;
   line-height: 1.4;
@@ -22,6 +21,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   transition: all 600ms ease;
   overscroll-behavior-y: none;
+}
+
+#touchme-app {
+  @apply bg-light-600 dark_(bg-dark-600) transition-all duration-600 ease-out text-dark-50 dark_text-light-300 ;
 }
 
 .header-anchor {
