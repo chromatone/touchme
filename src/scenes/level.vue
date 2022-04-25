@@ -41,7 +41,7 @@ g.arrows.pointer-events-none.transition(transform="translate(0 40)")
         :transform="`rotate(${dot * midi.time / 50000}) scale(${1 - (dot / 120) * midi.time / 1000000})`"
       )
   line.arrow(
-    style="transition: all 400ms ease-in-out;"
+    style="transition: all 400ms ease-out;"
     :x1="width / 2"
     :y1="height / 2"
     stroke-width="4"
