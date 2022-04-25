@@ -112,6 +112,7 @@ useKeyboard()
         icon-bx-tachometer(v-if="scene.name == 'level'")
         icon-bi-flower1(v-if="scene.name == 'rose'")
         icon-ic-outline-bar-chart(v-if="scene.name == 'stats'")
+        icon-ph-spiral(v-if="scene.name == 'spiral'")
 //debug
 </template>
 
