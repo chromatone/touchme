@@ -50,7 +50,7 @@ g.arrows.pointer-events-none.transition(transform="translate(0 40)")
     :x2="width / 2"
     :y2="20"
     :transform-origin="`${width / 2} ${height / 2}`"
-    :style="{ transform: `rotate(${(midi.note?.number * midi.note?.attack) * (1 + midi.time / 20000) - 60}deg)` }"
+    :style="{ transform: `rotate(${(midi.note?.number) * (1 + midi.time / 20000) - 60}deg)` }"
   )
 
   //- g(

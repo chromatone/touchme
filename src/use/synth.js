@@ -10,8 +10,8 @@ export const synth = {}
 
 export const synthOptions = reactive({
   midi: true,
-  bpm: useClamp(useStorage("tempo-bpm", 100), 10, 500),
-  quantize: '@8n',
+  bpm: useClamp(useStorage("tempo-bpm", 90), 10, 500),
+  quantize: useStorage('quantize', '@8n'),
   octave: useClamp(useStorage("synth-transpose", 0), -2, 2),
   transpose: computed(() => synthOptions.octave * 12),
   initiated: false,
@@ -51,6 +51,10 @@ export function useSynth() {
 
     Transport.bpm.set(synthOptions.bpm);
     Transport.start();
+
+    watch(() => synthOptions.bpm, bpm => {
+      Transport.bpm.rampTo(bpm, 2);
+    })
 
     watch(() => synthOptions.params, params => {
       if (synth.poly) {

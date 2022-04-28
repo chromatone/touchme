@@ -1,9 +1,11 @@
 <script setup>
 
-import { synthOptions } from '~/use/synth';
+import { synthOptions, useSynth } from '~/use/synth';
 
 const octaves = [-2, -1, 0, 1, 2]
 const modes = ['+0', '@8n', '@16n', '@32n']
+
+const { synthReleaseAll } = useSynth()
 
 function cycleOctaves() {
   let oct = octaves.findIndex(el => el == synthOptions.octave)
@@ -15,14 +17,10 @@ function cycle() {
   synthOptions.quantize = modes[++mode % (modes.length)]
 }
 
-
-
-
-
 </script>
 
 <template lang='pug'>
-.flex.gap-4.absolute.flex-col.right-2.bottom-2.top-20.text-xl.items-center.opacity-40.hover_opacity-100.transition.justify-between.items-center
+.flex.gap-4.absolute.flex-col.right-2.bottom-2.top-20.text-xl.items-center.opacity-40.hover_opacity-100.transition.justify-between.items-center(@click="synthReleaseAll('+1n')")
   .flex-0.flex.flex-col.gap-1
     state-fullscreen
     state-dark
@@ -39,6 +37,7 @@ function cycle() {
       @click="cycle"
       aria-label="Synth panel"
       ) {{ synthOptions.quantize }}
+    state-bpm
 </template>
 
 <style lang="postcss" scoped>
