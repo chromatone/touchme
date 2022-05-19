@@ -49,6 +49,8 @@ export function useSynth() {
       synthOptions.octave++
     })
 
+    onKeyDown('Escape', () => synthReleaseAll())
+
     Transport.bpm.set(synthOptions.bpm);
     Transport.start();
 

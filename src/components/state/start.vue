@@ -51,10 +51,10 @@ const steps = reactive({
       icon-ic-baseline-checklist.text-2xl
       .ml-2 Other options
     .mt-4 Or play notes with your PC keyboard 
+    img(src="/pc-keyboard.svg")
   .px-4(v-else)
-
     .flex.items-center.my-4(v-for="(step, name) in steps" :key="name")
-      input.transform.scale-200(type="checkbox" :disabled="step.disabled" :id="name" v-model="step.checked") 
+      input.transform.scale-200(type="checkbox" :disabled="step.disabled" :id="name" v-model="step.checked")
       label.ml-4(:for="name") {{ step.text }}
   button.button.mx-auto.w-full.font-bold(@click="init(); started = true") Start
 </template>
