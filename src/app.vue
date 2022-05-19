@@ -8,7 +8,6 @@ import { useMidi, useKeyboard } from '~/use/midi'
 import { useRoute, useRouter } from 'vue-router'
 import { onKeyStroke } from '@vueuse/core';
 import { init } from './use/synth';
-import { server } from './use/stats';
 
 
 const { midi } = useMidi()
@@ -105,12 +104,14 @@ useKeyboard()
         @click="changed = true"
         :to="scene"
         :class="{ active: $route.path == scene.path }"
+        v-tooltip.right="scene.name.charAt(0).toUpperCase() + scene.name.slice(1) + ' scene'"
         )
-        icon-la-plus(v-if="scene.name == 'cross'")
-        icon-ri-donut-chart-fill(v-if="scene.name == 'donut'")
+
         icon-ph-plugs-connected(v-if="scene.name == 'index'")
         icon-bx-tachometer(v-if="scene.name == 'level'")
         icon-bi-flower1(v-if="scene.name == 'rose'")
+        icon-la-plus(v-if="scene.name == 'cross'")
+        icon-ri-donut-chart-fill(v-if="scene.name == 'donut'")
         icon-ic-outline-bar-chart(v-if="scene.name == 'stats'")
         icon-ph-spiral(v-if="scene.name == 'spiral'")
 //debug

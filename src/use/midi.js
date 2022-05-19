@@ -79,6 +79,7 @@ export function useKeyboard() {
     }
     noteInOn(ev)
   }
+
   for (let keys in noteKeys) {
     onKeyDown(keys.split(''), (ev) => {
       if (ev.repeat) return

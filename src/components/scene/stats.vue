@@ -9,8 +9,9 @@ const acc = 200
 
 <template lang='pug'>
 
-g.text-overlay
+g.text-overlay.select-none
   text(
+    v-tooltip.bottom-start="'Notes played'"
     fill="currentColor"
     :x="30"
     :y="30"
@@ -43,8 +44,10 @@ g.text-overlay
     fill="currentColor"
     :x="width / 2"
     :y="30"
+    v-tooltip.bottom="'Current note'"
   ) {{ midi?.note?.identifier }}
   text(
+    v-tooltip.bottom-end="'Session time: playing / total'"
     fill="currentColor"
     :x="width - 10"
     :y="30"

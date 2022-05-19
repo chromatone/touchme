@@ -1,11 +1,14 @@
 import { createApp } from "vue";
 import App from "./app.vue";
 
-import './styles/index.css'
 
+import './styles/index.css'
+import 'floating-vue/dist/style.css'
 import "virtual:windi.css";
 
 import { createRouter, createWebHashHistory } from "vue-router";
+import FloatingVue from 'floating-vue'
+
 import routes from "~pages";
 
 const router = createRouter({
@@ -22,6 +25,7 @@ const router = createRouter({
 
 const app = createApp(App);
 app.use(router)
+app.use(FloatingVue)
 
 setTimeout(() => {
   app.mount("#touchme-app");
