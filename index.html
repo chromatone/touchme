@@ -25,6 +25,19 @@
   <body>
     <div id="touchme-app">Loading...</div>
     <script type="module" src="./src/main.js"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-229540973-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-229540973-1");
+    </script>
     <script type="text/javascript">
       window.$sleek = [];
       window.SLEEK_PRODUCT_ID = 355159471;

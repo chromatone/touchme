@@ -3,7 +3,7 @@
 import { synthOptions, useSynth } from '~/use/synth';
 
 const octaves = [-2, -1, 0, 1, 2]
-const modes = ['+0', '@8n', '@16n', '@32n']
+const modes = ['+0', '4n', '@8n', '@16n', '@32n']
 
 const { synthReleaseAll } = useSynth()
 

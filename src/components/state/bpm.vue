@@ -1,7 +1,7 @@
 <script setup>
 import { synthOptions } from '~/use/synth';
 
-const bpms = [60, 90, 120]
+const bpms = [60, 80, 100, 120]
 
 function cycle() {
   let index = bpms.findIndex(el => el == synthOptions.bpm)
