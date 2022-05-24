@@ -9,7 +9,7 @@ const acc = 200
 
 <template lang='pug'>
 
-g.text-overlay.select-none
+g.text-overlay.select-none(fill="currentColor")
   text(
     v-tooltip.bottom-start="'Notes played'"
     fill="currentColor"
@@ -53,4 +53,18 @@ g.text-overlay.select-none
     :y="30"
     text-anchor="end"
   ) {{ (midi?.total?.duration / 1000).toFixed() }} / {{ (midi.time / 1000).toFixed() }}s
+  text.text-16px(
+    :y="height - 20"
+    :x="width / 2"
+    text-anchor="middle"
+    opacity="0.6"
+  ) 
+    tspan.font-normal Made by
+    tspan(dx="4")
+      a(href="https://chromatone.center" target="_blank") Chromatone
+    tspan(dx="4") for
+    tspan(dx="4" )
+      a(href="https://playtronica.com" target="_blank") Playtronica
+    tspan(dx="4" )
+      a(href="https://shop.playtronica.com/products/touchme" target="_blank") TouchMe
 </template>
