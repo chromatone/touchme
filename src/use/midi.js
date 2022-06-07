@@ -6,6 +6,7 @@ import { synthOptions } from "./synth";
 export const midi = reactive({
   enabled: false,
   initiated: false,
+  keyboardInitiated: false,
   offset: -1,
   out: true,
   inputs: {},
@@ -40,57 +41,64 @@ export const midi = reactive({
   }
 });
 
+const noteKeys = {
+  KeyA: { note: 'C', offset: 0 },
+  KeyW: { note: 'C#', offset: 0 },
+  KeyS: { note: 'D', offset: 0 },
+  KeyE: { note: 'D#', offset: 0 },
+  KeyD: { note: 'E', offset: 0 },
+  KeyF: { note: 'F', offset: 0 },
+  KeyT: { note: 'F#', offset: 0 },
+  KeyG: { note: 'G', offset: 0 },
+  KeyY: { note: 'G#', offset: 0 },
+  KeyH: { note: 'A', offset: 0 },
+  KeyU: { note: 'A#', offset: 0 },
+  KeyJ: { note: 'B', offset: 0 },
+  KeyK: { note: 'C', offset: 1 },
+  KeyO: { note: 'C#', offset: 1 },
+  KeyL: { note: 'D', offset: 1 },
+  KeyP: { note: 'D#', offset: 1 },
+  Semicolon: { note: 'E', offset: 1 },
+  Quote: { note: 'F', offset: 1 },
+  BracketRight: { note: 'F#', offset: 1 },
+}
+
 
 export function useKeyboard() {
-  const noteKeys = {
-    'aф': { note: 'C', offset: 0 },
-    'wц': { note: 'C#', offset: 0 },
-    'sы': { note: 'D', offset: 0 },
-    'уe': { note: 'D#', offset: 0 },
-    'dв': { note: 'E', offset: 0 },
-    'fа': { note: 'F', offset: 0 },
-    'tе': { note: 'F#', offset: 0 },
-    'gп': { note: 'G', offset: 0 },
-    'yн': { note: 'G#', offset: 0 },
-    'hр': { note: 'A', offset: 0 },
-    'uг': { note: 'A#', offset: 0 },
-    'jо': { note: 'B', offset: 0 },
-    'kл': { note: 'C', offset: 1 },
-    'oщ': { note: 'C#', offset: 1 },
-    'lд': { note: 'D', offset: 1 },
-    'pз': { note: 'D#', offset: 1 },
-    ';ж': { note: 'E', offset: 1 },
-    '\'э': { note: 'F', offset: 1 },
-    ']ъ': { note: 'F#', offset: 1 },
-    '\\ё': { note: 'G', offset: 1 },
-  }
+
+  if (midi.keyboardInitiated) return
+
+  document.addEventListener('keydown', e => {
+    if (e.code == 'KeyZ') midi.offset--
+    if (e.code == 'KeyX') midi.offset++
+    if (e.repeat || !noteKeys[e.code]) return
+    if (e.ctrlKey || e.altKey || e.metaKey) return
+    if (e.code == 'Slash' || e.code == 'Quote') e.preventDefault()
+    playMidi(noteKeys[e.code].note, noteKeys[e.code].offset)
+  })
+
+  document.addEventListener('keyup', e => {
+    if (!noteKeys[e.code]) return
+    playMidi(noteKeys[e.code].note, noteKeys[e.code].offset, true)
+  })
+
 
   onKeyDown('Enter', () => midi.total.reset())
 
+  midi.keyboardInitiated = true
+}
 
-  function playMidi(name, offset, off) {
-    const note = new Note(name + (4 + offset + midi.offset), { attack: off ? 0 : 1 })
-    const ev = {
-      type: off ? 'noteoff' : 'noteon',
-      note,
-      port: { id: 'PC Keyboard' },
-      timestamp: midi.time,
-      target: { number: 0 },
-    }
-    noteInOn(ev)
+function playMidi(name, offset, off) {
+  let title = name + (4 + offset + midi.offset)
+  const note = new Note(title, { attack: off ? 0 : 1 })
+  const ev = {
+    type: off ? 'noteoff' : 'noteon',
+    note,
+    port: { id: 'PC Keyboard' },
+    timestamp: midi.time,
+    target: { number: 0 },
   }
-
-  for (let keys in noteKeys) {
-    onKeyDown(keys.split(''), (ev) => {
-      if (ev.repeat) return
-      playMidi(noteKeys[keys].note, noteKeys[keys].offset)
-    })
-    onKeyUp(keys.split(''), (ev) => {
-      if (ev.repeat) return
-      playMidi(noteKeys[keys].note, noteKeys[keys].offset, true)
-    })
-  }
-
+  noteInOn(ev)
 }
 
 

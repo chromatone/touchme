@@ -62,7 +62,10 @@ function randomScene() {
   return path
 }
 
-useKeyboard()
+onMounted(() => {
+  useKeyboard()
+})
+
 
 </script>
 

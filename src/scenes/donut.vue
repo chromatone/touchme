@@ -5,41 +5,37 @@ import { midi } from "~/use/midi.js";
 import { useScene } from "~/use/scene";
 const { width, height } = useScene();
 
-const radius = computed(() => width.value / 3);
-const circ = computed(() => 2 * Math.PI * radius.value);
+const radius = computed(() => (height.value < width.value ? height.value / 2 : width.value / 2) - 20);
+const len = computed(() => 2 * Math.PI * radius.value);
 
-const totalDur = computed(() => midi.total.durations.reduce((acc, val) => acc + val));
+const totalDur = computed(() => midi.total.durations.reduce((acc, val) => acc + val) || 1);
 
-function getOffset(val) {
-  return circ.value - (circ.value * val) / totalDur.value;
-}
+const parts = computed(() => midi.total.durations.map(el => (el / totalDur.value)))
+const sum = computed(() => {
+  let s = 0
+  const arr = [0];
+  parts.value.forEach(part => {
+    s += Number(part)
+    arr.push(s)
+  })
+  return arr
+})
 
-const chart = computed(() => {
-  let angle = -90;
-  const arr = [];
-  midi.total.durations.forEach((val, i) => {
-    arr.push(angle);
-    angle = (360 * val) / totalDur.value + angle;
-  });
-  return arr;
-});
 </script>
 
 <template lang="pug">
-g.donut
-  g(v-for="(value, index) in midi.total.durations")
-    circle(
+g.donut 
+
+  g(v-for="(value, index) in parts")
+    scene-ring(
       style="transition: all 500ms ease-out"
       :cx="width / 2", 
       :cy="height / 2", 
-      :r="(height < width ? height / 4 : width / 4)", 
-      fill="transparent", 
-      :stroke="pitchColor(index)", 
-      :stroke-width="width / 4"
-      :stroke-dasharray="circ"
-      :stroke-dashoffset="getOffset(value)"
-      :transform-origin="`${width / 2} ${height / 2}`"
-      :transform="`rotate(${chart[index] || 0})`"
+      :radius="radius",
+      :fill="pitchColor(index)", 
+      :from="sum[index] * 360"
+      :to="(sum[index] + parts[index]) * 360"
+      :thickness="width / 3"
       )
   circle(
     style="transition: all 200ms ease-out"
@@ -55,6 +51,6 @@ g.donut
     :x="width / 2"
     :y="height / 2 + 8"
     text-anchor="middle"
-    font-size="24"
+    font-size="14"
   ) {{ midi?.note?.identifier }}
 </template>
