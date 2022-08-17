@@ -1,6 +1,5 @@
 import { pitchColor, getCircleCoord, notes } from '~/use/chromatone'
 import { useElementBounding, useStorage } from "@vueuse/core";
-import SimplexNoise from 'simplex-noise';
 
 const visual = ref()
 

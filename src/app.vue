@@ -1,6 +1,6 @@
 <script setup>
 import { useRafFn } from '@vueuse/core'
-import SimplexNoise from 'simplex-noise';
+import { createNoise2D } from 'simplex-noise';
 import ColorHash from "color-hash";
 import scenes from '~pages'
 import { useScene, activeScene } from '~/use/scene';
@@ -16,12 +16,13 @@ const router = useRouter()
 
 const count = ref(0)
 
-const simplex = new SimplexNoise();
+const noise2D = createNoise2D();
+
 const angle = ref()
 
 const { pause, resume } = useRafFn(() => {
   count.value++
-  angle.value = simplex.noise2D(1, count.value / 2000);
+  angle.value = noise2D(1, count.value / 2000);
 })
 
 const getColor = new ColorHash({

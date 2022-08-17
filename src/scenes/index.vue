@@ -2,7 +2,7 @@
 import { pitchColor } from '~/use/chromatone'
 import { useMidi } from '~/use/midi.js'
 import { useElementBounding, useRafFn } from "@vueuse/core";
-import SimplexNoise from 'simplex-noise';
+import { createNoise2D } from 'simplex-noise';
 
 import { useScene } from '~/use/scene';
 const { width, height } = useScene()
@@ -10,7 +10,7 @@ const { width, height } = useScene()
 
 const { midi } = useMidi();
 
-const simplex = new SimplexNoise();
+const noise2D = createNoise2D();
 
 function useActor() {
   const actor = reactive({
@@ -24,9 +24,9 @@ function useActor() {
 
   const { pause, resume } = useRafFn(() => {
     count.value++
-    actor.x = (simplex.noise2D(initial * 100, count.value / 2000) + 1) / 2;
-    actor.y = (simplex.noise2D(initial * 200, count.value / 2000) + 1) / 2;
-    actor.angle = (simplex.noise2D(initial * 300, count.value / 2000) + 1) / 2;
+    actor.x = (noise2D(initial * 100, count.value / 2000) + 1) / 2;
+    actor.y = (noise2D(initial * 200, count.value / 2000) + 1) / 2;
+    actor.angle = (noise2D(initial * 300, count.value / 2000) + 1) / 2;
   })
   return actor
 }
