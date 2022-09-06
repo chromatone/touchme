@@ -77,8 +77,6 @@ onMounted(() => {
   .absolute.bottom-2.text-center.flex.flex-col.items-center.w-full(v-if="!changed")
     .text-sm Hold any note more than {{ midi.maxDuration / 1000 }} seconds or press Enter/Spacebar to randomly change current scene.
   state-start
-  transition(name="fade")
-    stats-panel()
   .h-full.w-full
     svg#visual.h-full.w-full(
       ref="visual"

@@ -27,6 +27,6 @@ const app = createApp(App);
 app.use(router)
 app.use(FloatingVue)
 
-setTimeout(() => {
-  app.mount("#touchme-app");
-}, 500)
+
+app.mount("#touchme-app");
+

@@ -24,7 +24,6 @@ function cycle() {
   .flex-0.flex.flex-col.gap-1
     state-fullscreen(v-tooltip.left="'Toggle fullscreen mode'")
     state-dark(v-tooltip.left="'Toggle dark mode'")
-    stats-button(v-tooltip.left="'App statistics'")
     midi-state(v-tooltip.left="'MIDI state'")
   .flex-auto
   .flex-0.flex.flex-col.items-center.gap-2
