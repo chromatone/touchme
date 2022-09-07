@@ -74,7 +74,7 @@ onMounted(() => {
 .flex.flex-col.h-100vh.w-full 
   // (:style="{ background }"  )
   state-overlay
-  .absolute.bottom-2.text-center.flex.flex-col.items-center.w-full(v-if="!changed")
+  .absolute.bottom-20.text-center.flex.flex-col.items-center.w-full(v-if="!changed")
     .text-sm Hold any note more than {{ midi.maxDuration / 1000 }} seconds or press Enter/Spacebar to randomly change current scene.
   state-start
   .h-full.w-full
