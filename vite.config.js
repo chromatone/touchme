@@ -8,7 +8,6 @@ import AutoImport from 'unplugin-auto-import/vite'
 import { VitePWA } from 'vite-plugin-pwa'
 import vue from '@vitejs/plugin-vue'
 import Pages from "vite-plugin-pages";
-import { extendRoutes } from "vitepress-pages";
 import generateSitemap from 'vite-plugin-pages-sitemap'
 
 
@@ -111,8 +110,10 @@ export default defineConfig({
     sourcemap: true,
     chunkSizeWarningLimit: Infinity,
     rollupOptions: {
-      manualChunks: () => 'main.js'
-    }
+      output: {
+        manualChunks: () => 'main.js'
+      }
+    },
   },
   //@ts-ignore
   ssr: {
