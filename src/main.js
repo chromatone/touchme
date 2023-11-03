@@ -1,10 +1,10 @@
 import { createApp } from "vue";
 import App from "./app.vue";
 
-
+import '@unocss/reset/tailwind.css'
+import 'uno.css'
 import './styles/index.css'
 import 'floating-vue/dist/style.css'
-import "virtual:windi.css";
 
 import { createRouter, createWebHashHistory } from "vue-router";
 import FloatingVue from 'floating-vue'

@@ -99,7 +99,6 @@ onMounted(() => {
         transition(name="fade" mode="out-in")
           keep-alive
             component#content(:is="Component")
-      scene-stats
     .absolute.left-0.top-10.flex.flex-col.gap-2.m-2.opacity-20.hover_opacity-100.transition
       router-link.button.p-2.cursor-pointer.text-3xl( 
         v-for="(scene, i) in scenes" :key="scene.path"

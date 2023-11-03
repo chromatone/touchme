@@ -241,7 +241,7 @@ function noteInOn(ev) {
   let note = ev.note;
   note.port = ev.port.id;
   note.type = ev.type;
-  note.timestamp = ev.timestamp;
+  note.timestamp = midi.time;
   note.channel = ev.target.number;
   if (ev.type == "noteoff") {
     note.velocity = 0;

@@ -37,7 +37,7 @@ g.arrows.pointer-events-none.transition(transform="translate(0 40)")
     :x2="width / 2"
     :y2="20"
     :transform-origin="`${width / 2} ${height / 2}`"
-    :style="{ transform: `rotate(${midi.note?.number * midi.note?.attack - 60}deg)` }"
+    :style="{ transform: `rotate(${midi.note?.number - 60}deg)` }"
   )
   circle.center.transition(
     :cx="width / 2"

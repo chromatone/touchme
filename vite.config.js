@@ -3,12 +3,15 @@ import { fileURLToPath, URL } from "url";
 import Components from 'unplugin-vue-components/vite'
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
-import WindiCSS from 'vite-plugin-windicss'
 import AutoImport from 'unplugin-auto-import/vite'
 import { VitePWA } from 'vite-plugin-pwa'
 import vue from '@vitejs/plugin-vue'
 import Pages from "vite-plugin-pages";
 import generateSitemap from 'vite-plugin-pages-sitemap'
+
+import Unocss from 'unocss/vite'
+import { transformerDirectives, presetIcons, presetUno, extractorSplit } from 'unocss'
+import extractorPug from '@unocss/extractor-pug'
 
 
 export default defineConfig({
@@ -24,6 +27,24 @@ export default defineConfig({
           isCustomElement: tag => tag == 'feDistantLight'
         }
       }
+    }),
+    Unocss({
+      transformers: [
+        transformerDirectives(),
+      ],
+      presets: [
+        presetIcons({
+          scale: 1.2,
+          extraProperties: {
+            'vertical-align': 'middle'
+          }
+        }),
+        presetUno(),
+      ],
+      extractors: [
+        extractorSplit,
+        extractorPug()
+      ]
     }),
     AutoImport({
       // targets to transform
@@ -63,14 +84,6 @@ export default defineConfig({
     }),
     Icons({
       defaultStyle: 'vertical-align: middle;',
-    }),
-    WindiCSS({
-      scan: {
-        dirs: ['./', '.vitepress'],
-        include: ['index.md'],
-        exclude: ['**/examples/**/*', '/node_modules/'],
-        fileExtensions: ['vue', 'ts', 'md'],
-      },
     }),
     // VitePWA({
     //   registerType: 'autoUpdate',

@@ -13,7 +13,7 @@ g.cross
     :y="0"
     :height="height"
     :width="100"
-    :style="`transform: scale(${midi.duration / 100}, 1)`"
+    :style="`transform: scale(${midi.duration / 60}, 1)`"
     :transform-origin="`${width / 2} ${0}`"
     :fill="pitchColor(midi?.note?.pitch - 24 + 7)"
   )
@@ -47,7 +47,7 @@ g.cross
     :x="0"
     :y="0"
     :transform-origin="`${0} ${height}`"
-    :style="`transform: scale(1,${midi.total.duration / midi.time})`"
+    :style="`transform: scale(1,${midi.total.duration / (midi.time)})`"
     :width="width"
     :height="height"
   )
