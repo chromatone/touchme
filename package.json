@@ -13,6 +13,7 @@
 	"license": "MIT",
 	"author": "Davay42",
 	"module": "true",
+	"type": "module",
 	"scripts": {
 		"build": "vite build ",
 		"deploy": "sh deploy.sh",
@@ -21,8 +22,9 @@
 	},
 	"dependencies": {
 		"@tonaljs/tonal": "^4.10.0",
-		"@vueuse/core": "^10.5.0",
-		"@vueuse/math": "^10.5.0",
+		"@unocss/reset": "^0.58.2",
+		"@vueuse/core": "^10.7.1",
+		"@vueuse/math": "^10.7.1",
 		"color-hash": "^2.0.2",
 		"colord": "^2.9.3",
 		"floating-vue": "^2.0.0-y.0",
@@ -31,23 +33,22 @@
 		"ms": "^2.1.3",
 		"simplex-noise": "^4.0.1",
 		"tone": "^14.8.49",
-		"vue": "^3.3.7",
+		"vue": "^3.4.3",
 		"vue-router": "^4.2.5",
-		"webmidi": "^3.1.6",
-		"@unocss/reset": "0.56.5"
+		"webmidi": "^3.1.8"
 	},
 	"devDependencies": {
-		"unocss": "0.56.5",
+		"@iconify/json": "^2.2.163",
 		"@unocss/extractor-pug": "0.56.5",
-		"@iconify/json": "^2.2.136",
-		"@vitejs/plugin-vue": "^4.4.0",
-		"pug": "3.0.2",
-		"unplugin-auto-import": "^0.16.7",
-		"unplugin-icons": "^0.17.3",
-		"unplugin-vue-components": "^0.25.2",
-		"vite": "4.5.0",
-		"vite-plugin-pages": "^0.31.0",
+		"@vitejs/plugin-vue": "^4.6.2",
+		"pug": "^3.0.2",
+		"unocss": "^0.58.2",
+		"unplugin-auto-import": "^0.17.3",
+		"unplugin-icons": "^0.18.1",
+		"unplugin-vue-components": "^0.26.0",
+		"vite": "^5.0.10",
+		"vite-plugin-pages": "^0.32.0",
 		"vite-plugin-pages-sitemap": "^1.6.1",
-		"vite-plugin-pwa": "^0.16.6"
+		"vite-plugin-pwa": "^0.17.4"
 	}
 }
