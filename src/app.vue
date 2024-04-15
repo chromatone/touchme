@@ -99,7 +99,7 @@ onMounted(() => {
         transition(name="fade" mode="out-in")
           keep-alive
             component#content(:is="Component")
-    .absolute.left-0.top-10.flex.flex-col.gap-2.m-2.opacity-20.hover_opacity-100.transition
+    .absolute.left-0.top-10.flex.flex-col.gap-2.m-2.opacity-20.hover-opacity-100.transition
       router-link.button.p-2.cursor-pointer.text-3xl( 
         v-for="(scene, i) in scenes" :key="scene.path"
         @click="changed = true"
@@ -124,24 +124,22 @@ onMounted(() => {
 }
 
 .nav {
-  @apply rounded-lg flex items-center flex-1 w-full bg-dark-50/40 hover_no-underline hover_shadow transition hover_bg-light-50/80;
+  @apply rounded-lg flex items-center flex-1 w-full bg-dark-50/40 hover-no-underline hover-shadow transition hover-bg-light-50/80;
 }
 
 .button {
-  @apply p-4 shadow transition opacity-90 hover_opacity-100 flex transition flex-auto justify-center items-center rounded-xl bg-light-400 dark_bg-dark-500;
+  @apply p-4 shadow transition opacity-90 hover-opacity-100 flex transition flex-auto justify-center items-center rounded-xl bg-light-400 dark-bg-dark-500;
 
   &:hover {
-    @apply bg-light-50 dark_bg-dark-50;
+    @apply bg-light-50 dark-bg-dark-50;
   }
 
   &.active {
-    @apply bg-dark-50 text-light-200 dark_bg-light-200 dark_text-dark-500;
+    @apply bg-dark-50 text-light-200 dark-bg-light-200 dark-text-dark-500;
   }
 }
 
 .panel {
-  @apply absolute p-4 m-4 bg-light-300 dark_bg-dark-300 z-20 flex flex-col gap-2 bg-opacity-90 dark_bg-opacity-90 flex items-center shadow-lg rounded-xl overflow-hidden right-2 bottom-2 max-w-sm overflow-y-scroll max-h-80vh;
+  @apply absolute p-4 m-4 bg-light-300 dark-bg-dark-300 z-20 flex flex-col gap-2 bg-opacity-90 dark-bg-opacity-90 flex items-center shadow-lg rounded-xl overflow-hidden right-2 bottom-2 max-w-sm overflow-y-scroll max-h-80vh;
 }
 </style>
-
-

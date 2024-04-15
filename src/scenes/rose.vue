@@ -34,7 +34,7 @@ g
     :transform-origin="`${width / 2} ${height / 2}`"
     :transform="`rotate(${30 * i})`"
   )
-  circle.mix-blend-multiply.dark_mix-blend-difference(
+  circle.mix-blend-multiply.dark-mix-blend-difference(
     style="transition: all 400ms ease-out"
     v-for="(coord, p) in round" :key="p"
     :cx="coord.x || width / 2"

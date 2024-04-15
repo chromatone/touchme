@@ -20,7 +20,7 @@ function cycle() {
 </script>
 
 <template lang='pug'>
-.flex.gap-4.absolute.flex-col.right-2.bottom-2.top-20.text-xl.items-center.opacity-40.hover_opacity-100.transition.justify-between.items-center
+.flex.gap-4.absolute.flex-col.right-2.bottom-2.top-20.text-xl.items-center.opacity-40.hover-opacity-100.transition.justify-between.items-center
   .flex-0.flex.flex-col.gap-1
     state-fullscreen(v-tooltip.left="'Toggle fullscreen mode'")
     state-dark(v-tooltip.left="'Toggle dark mode'")

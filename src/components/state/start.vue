@@ -33,7 +33,7 @@ const steps = reactive({
 </script>
 
 <template lang='pug'>
-.text-center.absolute.z-500.p-4.rounded-xl.shadow-xl.bg-light-200.mx-auto.dark_bg-dark-200.min-w-80(
+.text-center.absolute.z-500.p-4.rounded-xl.shadow-xl.bg-light-200.mx-auto.dark-bg-dark-200.min-w-80(
   style="left: 50%; top: 50%; transform: translate(-50%, -50%);"
   v-if="!synthOptions.initiated"
   )
@@ -59,5 +59,4 @@ const steps = reactive({
   button.button.mx-auto.w-full.font-bold(@click="init(); started = true") Start
 </template>
 
-<style lang="postcss" scoped>
-</style>
+<style lang="postcss" scoped></style>

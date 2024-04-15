@@ -17,7 +17,7 @@ g.cross
     :transform-origin="`${width / 2} ${0}`"
     :fill="pitchColor(midi?.note?.pitch - 24 + 7)"
   )
-  line.mix-blend-multiply.dark_mix-blend-difference(
+  line.mix-blend-multiply.dark-mix-blend-difference(
     style="transition: all 300ms ease-in-out"
     :x1="0"
     :x2="width"
