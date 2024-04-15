@@ -8,6 +8,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 import vue from '@vitejs/plugin-vue'
 import Pages from "vite-plugin-pages";
 import generateSitemap from 'vite-plugin-pages-sitemap'
+import { viteSingleFile } from "vite-plugin-singlefile"
 
 import Unocss from 'unocss/vite'
 import { transformerDirectives, presetIcons, presetUno, extractorSplit } from 'unocss'
@@ -21,6 +22,7 @@ export default defineConfig({
     },
   },
   plugins: [
+    viteSingleFile({ removeViteModuleLoader: true }),
     vue({
       template: {
         compilerOptions: {
@@ -119,14 +121,8 @@ export default defineConfig({
   },
 
   build: {
-    cssCodeSplit: false,
-    sourcemap: true,
-    chunkSizeWarningLimit: Infinity,
-    rollupOptions: {
-      output: {
-        manualChunks: () => 'main.js'
-      }
-    },
+
+    target: "esnext",
   },
   //@ts-ignore
   ssr: {
