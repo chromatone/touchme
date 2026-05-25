@@ -10,12 +10,22 @@ const len = computed(() => 2 * Math.PI * radius.value);
 
 const totalDur = computed(() => midi.total.durations.reduce((acc, val) => acc + val) || 1);
 
-const parts = computed(() => midi.total.durations.map(el => (el / totalDur.value)))
+// Only include pitches that have actual duration data
+const segments = computed(() => {
+  return midi.total.durations
+    .map((dur, index) => ({ dur, index }))
+    .filter(seg => seg.dur > 0)
+    .map(seg => ({
+      index: seg.index,
+      part: seg.dur / totalDur.value
+    }))
+})
+
 const sum = computed(() => {
   let s = 0
   const arr = [0];
-  parts.value.forEach(part => {
-    s += Number(part)
+  segments.value.forEach(seg => {
+    s += seg.part
     arr.push(s)
   })
   return arr
@@ -24,21 +34,19 @@ const sum = computed(() => {
 </script>
 
 <template lang="pug">
-g.donut 
+g.donut
 
-  g(v-for="(value, index) in parts")
+  g(v-for="(seg, i) in segments" :key="seg.index")
     scene-ring(
-      style="transition: all 500ms ease-out"
-      :cx="width / 2", 
-      :cy="height / 2", 
+      :cx="width / 2",
+      :cy="height / 2",
       :radius="radius",
-      :fill="pitchColor(index)", 
-      :from="sum[index] * 360"
-      :to="(sum[index] + parts[index]) * 360"
-      :thickness="width / 3"
+      :fill="pitchColor(seg.index)",
+      :from="sum[i] * 360"
+      :to="(sum[i] + seg.part) * 360"
+      :thickness="radius * 0.8"
       )
   circle(
-    style="transition: all 200ms ease-out"
     :cx="width / 2"
     :cy="height / 2"
     :r="30"

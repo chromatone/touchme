@@ -1,13 +1,12 @@
 <script setup>
-import { useRafFn } from '@vueuse/core'
 import { createNoise2D } from 'simplex-noise';
-import ColorHash from "color-hash";
 import scenes from '~pages'
 import { useScene, activeScene } from '~/use/scene';
-import { useMidi, useKeyboard } from '~/use/midi'
+import { useMidi, useKeyboard, registerAnimationCallback } from '~/use/midi'
 import { useRoute, useRouter } from 'vue-router'
 import { onKeyStroke } from '@vueuse/core';
 import { init } from './use/synth';
+import { getColor, gradientColor } from '~/use/colors';
 
 
 const { midi } = useMidi()
@@ -20,18 +19,17 @@ const noise2D = createNoise2D();
 
 const angle = ref()
 
-const { pause, resume } = useRafFn(() => {
-  count.value++
-  angle.value = noise2D(1, count.value / 2000);
+// Use shared animation loop
+onMounted(() => {
+  const unregister = registerAnimationCallback(() => {
+    count.value++
+    angle.value = noise2D(1, count.value / 2000);
+  })
+  onUnmounted(unregister)
 })
 
-const getColor = new ColorHash({
-  saturation: [0.05, 0.28, 0.62],
-  lightness: [0.75, 0.87, 0.9],
-})
-
-const color1 = computed(() => getColor.hex(Math.random() * 100000 + 'a'))
-const color2 = computed(() => getColor.hex(Math.random() * 100000 + 'b'))
+const color1 = computed(() => gradientColor.hex(Math.random() * 100000 + 'a'))
+const color2 = computed(() => gradientColor.hex(Math.random() * 100000 + 'b'))
 const background = computed(() => `linear-gradient(${angle.value * 360}deg, ${color1.value}, ${color2.value})`)
 
 const { visual, width, height } = useScene()
@@ -120,7 +118,7 @@ onMounted(() => {
 
 <style lang="postcss">
 .app {
-  @apply transition duration-800ms relative overflow-y-scroll absolute min-h-full flex flex-col items-center text-left w-full;
+  @apply relative overflow-y-scroll absolute min-h-full flex flex-col items-center text-left w-full;
 }
 
 .nav {

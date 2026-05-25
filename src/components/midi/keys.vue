@@ -59,15 +59,15 @@ svg.w-full.mt-2#chroma-keys.h-full(
       v-for="(key, k) in keys.white" :key="key"
       :transform="`translate(${k * 100 + 5} 30)`"
     )
-      rect.transition-all.duration-300.ease-out(
+      rect(
         @click="$emit('update:pitch', key)"
         width="90"
         height="290"
         rx="45"
         :fill="keyColor(key, true)"
-        style="filter:url(#shadowButton);transition: fill 1200ms ease-out"
+        style="filter:url(#shadowButton)"
       )
-      circle.transition-all.duration-300.ease-out(
+      circle(
         @click="$emit('update:pitch', key)"
         cy="245"
         cx="45"
@@ -85,17 +85,17 @@ svg.w-full.mt-2#chroma-keys.h-full(
       v-for="(key, k) in keys.black" :key="key"
       :transform="`translate(${k * 100 + 55} -10)`"
     )
-      rect.transition-all.duration-300.ease-out(
+      rect(
         @click="$emit('update:pitch', key)"
         v-if="key"
         width="90"
         height="220"
         rx="45"
-        style="filter:url(#shadowButton);transition: fill 1200ms ease-out"
+        style="filter:url(#shadowButton)"
         :fill="keyColor(key, true)"
         :data-check="key"
       )
-      circle.transition-all.duration-300.ease-out(
+      circle(
         @click="$emit('update:pitch', key)"
         v-if="key"
         cy="175"
@@ -114,13 +114,10 @@ svg.w-full.mt-2#chroma-keys.h-full(
 </template>
 
 <style lang="postcss" scoped>
-.key text {
-  transition: all 300ms ease;
-}
-
 .letters .key .text {
   opacity: 1;
 }
+
 .key:hover text {
   opacity: 1;
 }

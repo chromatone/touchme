@@ -1,7 +1,7 @@
 <script setup>
 import { pitchColor } from '~/use/chromatone'
-import { useMidi } from '~/use/midi.js'
-import { useElementBounding, useRafFn } from "@vueuse/core";
+import { useMidi, registerAnimationCallback } from '~/use/midi.js'
+import { useElementBounding } from "@vueuse/core";
 import { createNoise2D } from 'simplex-noise';
 
 import { useScene } from '~/use/scene';
@@ -22,11 +22,15 @@ function useActor() {
 
   const initial = Math.random()
 
-  const { pause, resume } = useRafFn(() => {
-    count.value++
-    actor.x = (noise2D(initial * 100, count.value / 2000) + 1) / 2;
-    actor.y = (noise2D(initial * 200, count.value / 2000) + 1) / 2;
-    actor.angle = (noise2D(initial * 300, count.value / 2000) + 1) / 2;
+  // Use shared animation loop
+  onMounted(() => {
+    const unregister = registerAnimationCallback(() => {
+      count.value++
+      actor.x = (noise2D(initial * 100, count.value / 2000) + 1) / 2;
+      actor.y = (noise2D(initial * 200, count.value / 2000) + 1) / 2;
+      actor.angle = (noise2D(initial * 300, count.value / 2000) + 1) / 2;
+    })
+    onUnmounted(unregister)
   })
   return actor
 }

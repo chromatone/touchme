@@ -103,6 +103,14 @@ function playMidi(name, offset, off) {
 
 
 
+// Shared animation loop for performance
+const animationCallbacks = new Set()
+
+export function registerAnimationCallback(callback) {
+  animationCallbacks.add(callback)
+  return () => animationCallbacks.delete(callback)
+}
+
 const { pause, resume } = useRafFn(() => {
   midi.time = WebMidi.time
   if (midi?.note?.velocity > 0) {
@@ -112,6 +120,8 @@ const { pause, resume } = useRafFn(() => {
     midi.total.durations[midi?.note?.pitch || 0] += midi.duration
     midi.duration = 0
   }
+  // Execute all registered animation callbacks
+  animationCallbacks.forEach(cb => cb(midi.time))
 })
 
 watch(() => midi.duration, dur => {

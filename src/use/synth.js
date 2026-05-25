@@ -2,6 +2,7 @@ import { PolySynth, MonoSynth, start, now, Midi, Transport, Reverb, Frequency, A
 import { midi } from './midi'
 import { useStorage } from '@vueuse/core'
 import { onKeyDown } from '@vueuse/core'
+import { useClamp } from '@vueuse/math'
 
 
 export const synth = {}

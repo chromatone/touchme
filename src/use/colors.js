@@ -67,14 +67,20 @@ export function chromaColorMix(chroma, tonic, part = 0.3) {
 
 import ColorHash from "color-hash";
 
+// Consolidated ColorHash instances for performance
 export const getColor = new ColorHash({
   hue: [0, 10, 360],
   saturation: [0.05, 0.18, 0.82],
   lightness: [0.65, 0.87, 0.9],
 })
 
-
 export const userColor = new ColorHash({
   saturation: [0.65, 0.78, 0.92],
   lightness: [0.65, 0.87, 0.9],
+})
+
+// Additional instance for background gradients (replaces duplicate in app.vue)
+export const gradientColor = new ColorHash({
+  saturation: [0.05, 0.28, 0.62],
+  lightness: [0.75, 0.87, 0.9],
 })
