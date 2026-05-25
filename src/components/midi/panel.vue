@@ -20,7 +20,7 @@ onKeyStroke(' ', ev => {
   .p-2.border.border-red-500.text-red-500(v-if="!midi?.enabled") MIDI is not available. Use a 
     a.font-normal.underline(href="https://caniuse.com/?search=midi" target="_blank") compatible browser 
     span or 
-    a.font-normal.underline(href="https://apps.apple.com/ru/app/web-midi-browser/id953846217" target="_blank") Web MIDI Browser on iOS
+    a.font-normal.underline(href="https://apps.apple.com/ru/app/midiweb-browser/id6757226617" target="_blank") MIDIWeb Browser on iOS
   .flex.flex-wrap.gap-4.justify-center(v-else)
     midi-input(
       :input="input"
