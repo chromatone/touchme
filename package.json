@@ -10,6 +10,9 @@
 		"type": "ko-fi",
 		"url": "https://ko-fi.com/davay"
 	},
+	"engines": {
+		"node": ">=24.0.0"
+	},
 	"packageManager": "pnpm@11.3.0",
 	"license": "MIT",
 	"author": "Davay42",
