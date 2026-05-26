@@ -14,10 +14,10 @@ g.stats
         style="transition: all 300ms ease-out"
         v-for="(n, i) in 12" :key="i"
         :x="i * width / 12"
-        :y="height - height / 9 * o"
+        :y="height / 9 * o"
         :width="width / 12"
         :height="height / 9"
-        :transform-origin="`${width / 12} ${height - height / 9 * (o - 0.5)}`"
+        :transform-origin="`${width / 12} ${height / 9 * (o + 0.5)}`"
         :style="`transform: scale(1,${(n - 4 + m * 12) == midi?.note?.number && midi?.note?.attack ? midi?.duration / 300 + 1 : 1})`"
         :fill="pitchColor(i + 12 * n, 3, 1, (n - 4 + m * 12) == midi?.note?.number && midi?.note?.attack ? 1 : 0.05)"
       )
@@ -33,7 +33,7 @@ g.stats
       :fill="pitchColor(p, 2)"
       :transform-origin="`${0} ${height}`"
       style="transition: all 200ms ease-out"
-      :style="`transform: scale(1,${dur / midi.total.duration || 0})`"
+      :style="`transform: scale(1,${(dur / midi.total.duration || 0) * 2})`"
     )
     text(
       :x="width / 24"

@@ -6,6 +6,8 @@ import { useStorage } from '@vueuse/core';
 
 const started = ref(false)
 
+const isIOS = computed(() => /iPad|iPhone|iPod/.test(navigator.userAgent))
+
 const steps = reactive({
   browser: {
     text: 'MIDI enabled browser',
@@ -17,12 +19,8 @@ const steps = reactive({
     checked: useStorage('touch-me', false)
   },
   usb: {
-    text: "USB cable (you have it in your package)",
+    text: "USB cable or Bluetooth connection",
     checked: useStorage('usb-cable', false)
-  },
-  adapter: {
-    text: "Special adapter, if your device doesn’t have a usb port ",
-    checked: useStorage('usb-adapter', false)
   },
   friend: {
     text: "Your best friend ",
@@ -38,18 +36,22 @@ const steps = reactive({
   v-if="!synthOptions.initiated"
   )
   h2.text-center.text-3xl.my-4 Let's play music with touch 
-  .p-4.flex.flex-col.gap-2(v-if="!midi.enabled") This interactive experience needs Web MIDI API support. Unfortunately, your current browser doesn't provide it. Is it Firefox or Safari? Please, use another one here.
+  .p-4.flex.flex-col.gap-2(v-if="!midi.enabled") This interactive experience needs Web MIDI API support.
 
-    a.button.p-4.flex.items-center(href="https://chrome.google.com" target="_blank")
-      icon-la-chrome.text-2xl
-      .ml-2 Google Chrome for Desktop or Android
+    .flex.gap-2(v-if="!isIOS")
+      a.button.p-4.flex.items-center(href="https://www.firefox.com/" target="_blank")
+        icon-la-firefox.text-2xl
+        .ml-2 Firefox
+      a.button.p-4.flex.items-center(href="https://www.google.com/chrome/" target="_blank")
+        icon-la-chrome.text-2xl
+        .ml-2  Chrome
 
     a.button.p-4.flex.items-center(href="https://apps.apple.com/ru/app/midiweb-browser/id6757226617" target="_blank")
       icon-la-apple.text-2xl
       .ml-2 MIDIWeb Browser for iOS
-    a.button.p-4.flex.items-center(href="https://caniuse.com/?search=midi" target="_blank")
-      icon-ic-baseline-checklist.text-2xl
-      .ml-2 Other options
+    //- a.button.p-4.flex.items-center(href="https://caniuse.com/?search=midi" target="_blank")
+    //-   icon-ic-baseline-checklist.text-2xl
+    //-   .ml-2 Other options
     .mt-4 Or play notes with your PC keyboard 
     img(src="/pc-keyboard.svg")
   .px-4(v-else)

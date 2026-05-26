@@ -96,6 +96,11 @@ export function init() {
   synth.pan.start()
 
   synthOptions.initiated = true
+
+  // Play a short note to ensure audio context is started
+  setTimeout(() => {
+    synth.poly.triggerAttackRelease('C4', '32n')
+  }, 100)
 }
 
 export function synthOnce(note = 'A4', duration = '8n', time) {
